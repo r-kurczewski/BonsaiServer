@@ -11,7 +11,6 @@ using Microsoft.Extensions.Options;
 
 namespace BonsaiServer.Controllers
 {
-    [Produces("application/json")]
     [Route("[controller]")]
     public class LoginController : Controller
     {
@@ -21,52 +20,34 @@ namespace BonsaiServer.Controllers
             _appSettings = appSettings.Value;
         }
 
-        [HttpGet]
-        public IEnumerable<Person> Get()
+        [HttpPost]
+        public IActionResult Login([FromBody]Credentials cred)
         {
-            var result = new List<Person>();
             MySqlConnection conn = new MySqlConnection(_appSettings.DefaultConnection);
             try
             {
+                var sql = $"SELECT password FROM users WHERE login = '{cred.login}'";
+                bool success; 
                 conn.Open();
-
-                var sql = "SELECT name, surname, age from test";
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
-                while (rdr.Read())
-                {
-                    result.Add(new Person(rdr.GetString(0), rdr.GetString(1), rdr.GetInt32(2)));
-                }
+                rdr.Read();
+                if (rdr.HasRows && rdr.GetString(0) == cred.password)
+                    success = true;
+                else
+                    success = false;
                 rdr.Close();
+                if(success) return Ok("Logged in as " + cred.login);
+                else return BadRequest("Wrong login or password.");
             }
             catch (Exception ex)
             {
-                Console.WriteLine(ex.ToString());
+                return BadRequest(ex.ToString()); 
             }
-            conn.Close();
-            return result;
-        }
-
-        [HttpPost]
-        public void Post([FromBody]string value)
-        {
-        }
-
-        [Serializable]
-        public class Person
-        {
-            public string name;
-            public string surname;
-            public int age;
-
-            public Person(string name, string surname, int age)
+            finally
             {
-                this.name = name;
-                this.surname = surname;
-                this.age = age;
+                conn.Close();
             }
         }
-
-
     }
 }

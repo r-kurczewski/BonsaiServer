@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
+using BonsaiServer.Model;
 using Microsoft.AspNetCore.Mvc;
 
 namespace BonsaiServer.Controllers
@@ -10,9 +11,9 @@ namespace BonsaiServer.Controllers
     public class HomeController : Controller
     {
         [HttpGet]
-        public string Get()
+        public IActionResult Home()
         {
-            return "Bonsai REST Server is ready.";
+            return Ok("Bonsai REST Server is ready.");
         }
     }
 }

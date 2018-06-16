@@ -18,9 +18,16 @@ namespace BonsaiServer.Controllers
         }
 
         [HttpGet]
-        public string[] Get()
+        public IActionResult Get()
         {
-            return new string[] { _appSettings.Environment, _appSettings.DefaultConnection };
+            return Ok(_appSettings);
+        }
+
+    [Route("test")]
+    [HttpGet]
+    public IActionResult Test()
+        {
+            return Ok();
         }
     }
 }

@@ -7,7 +7,7 @@ namespace BonsaiServer.Model
 {
     public class AppSettings
     {
-        public string DefaultConnection { get; set; }
         public string Environment { get; set; }
+        public string DefaultConnection { get; set; }
     }
 }
