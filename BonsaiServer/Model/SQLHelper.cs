@@ -8,6 +8,15 @@ namespace BonsaiServer.Model
 {
     public class SQLHelper
     {
+        public static T GetObject<T>(MySqlDataReader rdr) where T : class
+        {
+            var dict = new Dictionary<string, object>();
+            for (int i = 0; i < rdr.FieldCount; i++)
+                dict[rdr.GetName(i)] = rdr.GetValue(i);
+            T result = (T)Activator.CreateInstance(typeof(T));
+            return Utility.FromDictionary<T>(dict);
+        }
+
         public static int GetUserID(Credentials cred, MySqlConnection conn)
         {
             int result = 0;
@@ -23,6 +32,19 @@ namespace BonsaiServer.Model
                 rdr.Close();
             }
             return result;
-        } 
+        }
+
+        public static bool IsUserPlant(int plantID, int userID, MySqlConnection conn)
+        {
+            var sql = $"SELECT id FROM plants WHERE userID = @userID AND id = @plantID";
+            var cmd = new MySqlCommand(sql, conn);
+            cmd.Parameters.AddWithValue("@userID", userID);
+            cmd.Parameters.AddWithValue("@plantID", plantID);
+            var rdr = cmd.ExecuteReader();
+            var result = rdr.HasRows;
+            rdr.Close();
+            return result;
+        }
+
     }
 }

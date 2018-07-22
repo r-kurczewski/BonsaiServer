@@ -42,7 +42,7 @@ namespace BonsaiServer.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.ToString()); 
+                return StatusCode(500, ex.ToString()); 
             }
             finally
             {

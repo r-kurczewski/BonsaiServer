@@ -9,16 +9,6 @@ namespace BonsaiServer.Model
 {
     public class Utility
     {
-
-        public static T GetObject<T>(MySqlDataReader rdr) where T : class
-        {
-            var dict = new Dictionary<string, object>();
-            for(int i = 0; i<rdr.FieldCount; i++)
-                dict[rdr.GetName(i)] = rdr.GetValue(i);
-            T result = (T)Activator.CreateInstance(typeof(T));
-           return FromDictionary<T>(dict);
-        }
-
         public static T FromDictionary<T>(IDictionary<string, object> dict) where T : class
         {
             Type type = typeof(T);
@@ -68,6 +58,22 @@ namespace BonsaiServer.Model
                 result.Add(field.Name);
             }
             return result;
+        }
+
+        public static List<string> GetFields<T>(T obj) where T : class
+        {
+            return GetFields<T>();
+        }
+
+        public static List<string> ToStringList<T>(T obj) where T : class
+        {
+            List<object> objList = ToList(obj);
+            List<string> strList = new List<string>();
+            foreach (var item in objList)
+            {
+                strList.Add(item.ToString());
+            }
+            return strList;
         }
     }
 }

@@ -31,18 +31,20 @@ namespace BonsaiServer.Controllers
                 conn.Open();
                 var fields = Utility.GetFields<Plant>();
                 var select = String.Join(", ", fields);
-                var sql = $"SELECT {select} FROM plants INNER JOIN users ON (users.userID = plants.userID) WHERE login = @login AND password = @password";
+                var sql = $@"SELECT {select} FROM plants 
+                             INNER JOIN users ON (users.userID = plants.userID) 
+                             WHERE login = @login AND password = @password ORDER BY id ASC";
                 var cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@login", cred.login);
                 cmd.Parameters.AddWithValue("@password", cred.password);
                 var rdr = cmd.ExecuteReader();
                 while (rdr.Read())
-                    result.Add(Utility.GetObject<Plant>(rdr));
+                    result.Add(SQLHelper.GetObject<Plant>(rdr));
                 return Ok(result);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.ToString());
+                return StatusCode(500, ex.ToString());
             }
             finally
             {
@@ -50,9 +52,9 @@ namespace BonsaiServer.Controllers
             }
         }
 
-        [Route("update")]
+        [Route("move")]
         [HttpPost]
-        public IActionResult UpdateSlots([FromBody] AuthorizedData<List<int[]>> updates)
+        public IActionResult UpdateSlots([FromBody] AuthData<List<int[]>> updates)
         {
             MySqlConnection conn = new MySqlConnection(_appSettings.DefaultConnection);
             try
@@ -71,7 +73,36 @@ namespace BonsaiServer.Controllers
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.ToString());
+                return StatusCode(500, ex.ToString());
+            }
+            finally
+            {
+                conn.Close();
+            }
+        }
+
+        [Route("rename")]
+        [HttpPost]
+        public IActionResult Rename([FromBody] AuthData<Dictionary<int, string>> data)
+        {
+            var conn = new MySqlConnection(_appSettings.DefaultConnection);
+            try
+            {
+                conn.Open();
+                int userID = SQLHelper.GetUserID(data.cred, conn);
+                foreach (var item in data.data)
+                {
+                    var sql = $"UPDATE plants SET name = @name WHERE userID = {userID} AND id = @id";
+                    var cmd = new MySqlCommand(sql, conn);
+                    cmd.Parameters.AddWithValue("@name", item.Value);
+                    cmd.Parameters.AddWithValue("@id", item.Key);
+                    cmd.ExecuteNonQuery();
+                }
+                return Ok();
+            }
+            catch (MySqlException ex)
+            {
+                return StatusCode(500, ex.Message);
             }
             finally
             {

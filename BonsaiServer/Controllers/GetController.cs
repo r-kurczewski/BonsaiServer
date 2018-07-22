@@ -30,7 +30,7 @@ namespace BonsaiServer.Controllers
             {
                 conn.Open();
                 var result = new List<string>{"Available tables:"};
-                var sql = "SELECT table_name FROM information_schema.tables where table_schema='bonsai'";
+                var sql = "show tables";
                 var cmd = new MySqlCommand(sql, conn);
                 var rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -72,13 +72,16 @@ namespace BonsaiServer.Controllers
                     result.Add(temp);
                 }
                 rdr.Close();
+                return Ok(result);
             }
             catch (Exception ex)
             {
-                return BadRequest(ex.Message);
+                return StatusCode(500, ex.Message);
             }
-            conn.Close();
-            return Ok(result);
+            finally
+            {
+                conn.Close();
+            }
         }
     }
 }

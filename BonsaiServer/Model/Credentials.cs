@@ -33,7 +33,7 @@ namespace BonsaiServer.Model
     }
 
     [Serializable]
-    public class AuthorizedData<T>
+    public class AuthData<T>
     {
         public Credentials cred;
         public T data;

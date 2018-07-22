@@ -32,12 +32,24 @@ namespace BonsaiServer.Controllers
                 var sql = $"INSERT INTO users(login, password, email) VALUES ('{cred.login}', '{cred.password}', '{cred.email}')";
                 var cmd = new MySqlCommand(sql, conn);
                 var  rdr = cmd.ExecuteNonQuery();
-                conn.Close();
+                #region add start plants
+                var userID = SQLHelper.GetUserID(cred, conn);
+                sql = $@"INSERT INTO plants VALUES 
+                        (NULL, '{userID}', 'A', '1', '1', '1', '1', '1', '1', '1', ''), 
+                        (NULL, '{userID}', 'B', '2', '2', '1', '2', '2', '2', '2', ''), 
+                        (NULL, '{userID}', 'C', '3', '3', '1', '3', '3', '3', '3', '')";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                #endregion
                 return Ok($"Account {cred.login} successfully created.");
             }
             catch (MySqlException ex)
             {
                 return StatusCode(500, ex.Message);
+            }
+            finally
+            {
+                conn.Close();
             }
         }
 
@@ -49,14 +61,19 @@ namespace BonsaiServer.Controllers
             try
             {
                 conn.Open();
-                if (LoginExist(cred.login, conn)) return StatusCode(409, "Login is already used.");
+                if (LoginExist(cred.login, conn))
+                    return StatusCode(409, "Login is already used.");
+                else
+                    return Ok($"Login {cred.login} is available.");
             }
             catch (MySqlException ex)
             {
                 return StatusCode(500, ex.Message);
             }
-            conn.Close();
-            return Ok($"Login {cred.login} is available.");
+            finally
+            {
+                conn.Close();
+            }
         }
 
         public bool LoginExist(string login, MySqlConnection conn)

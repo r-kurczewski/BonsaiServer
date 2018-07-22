@@ -20,7 +20,12 @@ namespace BonsaiServer.Controllers
         [HttpGet]
         public IActionResult Get()
         {
-            return Ok(_appSettings);
+            if(_appSettings.Environment == "Development")
+                return Ok(_appSettings);
+            else
+            {
+                return Ok("Access denied.");
+            }
         }
 
     [Route("test")]

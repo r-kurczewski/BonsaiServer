@@ -10,6 +10,7 @@ namespace BonsaiServer.Model
     public class Plant
     {
         public int id;
+        public string name;
         public int leaves_id;
         public int leaves_color;
         public int flower_id;
