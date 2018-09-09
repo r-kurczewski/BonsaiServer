@@ -32,10 +32,7 @@ namespace BonsaiServer.Controllers
                 MySqlCommand cmd = new MySqlCommand(sql, conn);
                 MySqlDataReader rdr = cmd.ExecuteReader();
                 rdr.Read();
-                if (rdr.HasRows && rdr.GetString(0) == cred.password)
-                    success = true;
-                else
-                    success = false;
+                success = rdr.HasRows && rdr.GetString(0) == cred.password;
                 rdr.Close();
                 if(success) return Ok("Logged in as " + cred.login);
                 else return BadRequest("Wrong login or password.");

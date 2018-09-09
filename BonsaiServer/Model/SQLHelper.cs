@@ -29,8 +29,8 @@ namespace BonsaiServer.Model
             {
                 rdr.Read();
                 result = rdr.GetInt32(0);
-                rdr.Close();
             }
+            rdr.Close();
             return result;
         }
 

@@ -83,8 +83,16 @@ namespace BonsaiServer.Controllers
             }
         }
 
+        [HttpGet("collect/{id}")]
+        public IActionResult CollectGET(int id)
+        {
+            var cred = new Credentials("radek", "450a10fad8bc1453cf4690e7391f34df4e7c3621ccc7e1b45699190c6acc36e4");
+            var data = new AuthData<int>(cred, id);
+            return Collect(data);
+        }
+
         [HttpPost("collect")]
-        public IActionResult Collect([FromBody] AuthData<Mutation> data)
+        public IActionResult Collect([FromBody] AuthData<int> data)
         {
             var conn = new MySqlConnection(_appSettings.DefaultConnection);
             try
@@ -95,11 +103,11 @@ namespace BonsaiServer.Controllers
                 var sql = $@"SELECT plants.* FROM plants 
                             INNER JOIN mutations ON (plants.id = mutations.plant1 OR plants.id = mutations.plant2)
                             INNER JOIN users ON (users.userID = plants.userID)
-                            WhERE plants.userID = {userID} AND mutations.id = @id";
+                            WHERE plants.userID = {userID} AND mutations.id = @id";
                 var cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@login", data.cred.login);
                 cmd.Parameters.AddWithValue("@password", data.cred.password);
-                cmd.Parameters.AddWithValue("@id", data.data.id);
+                cmd.Parameters.AddWithValue("@id", data.data);
                 var rdr = cmd.ExecuteReader();
                 while (rdr.Read())
                 {
@@ -107,13 +115,13 @@ namespace BonsaiServer.Controllers
                 }
                 rdr.Close();
                 var newPlant = MutationScript.Cross(plants);
-                var plantFields = String.Join(", ", Utility.GetFields(newPlant).Skip(1)); //skip id
-                var plantValues = Utility.ToStringList(newPlant).Skip(1); //skip id
-                var plantValuesString = $"'{String.Join("', '", plantValues)}'";
-                sql = $@"INSERT INTO plants VALUES (null, {userID}, {plantValuesString})";
+                var plantDict = Utility.ToDictionary(newPlant);
+                var plantFields = $"`{String.Join("`, `", plantDict.Keys)}`";
+                var plantValues = $"'{String.Join("', '", plantDict.Values)}'";
+                sql = $@"INSERT INTO plants(userID, {plantFields}) VALUES ({userID}, {plantValues})";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
-                sql = $"DELETE FROM mutations WHERE id = {data.data.id}";
+                sql = $"DELETE FROM mutations WHERE id = {data.data}";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 return Ok("Plant created.");

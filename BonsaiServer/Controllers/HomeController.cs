@@ -21,18 +21,23 @@ namespace BonsaiServer.Controllers
         [HttpGet]
         public IActionResult Home()
         {
-            return Ok("Bonsai REST Server is ready.");
-        }
-
-
-    [HttpGet("test/{userID}/{plantID}")]
-    public IActionResult Test(int userID, int plantID)
-        {
             var conn = new MySqlConnection(_appSettings.DefaultConnection);
-            conn.Open();
-            var result = SQLHelper.IsUserPlant(userID, plantID, conn);
-            conn.Close();
-            return Ok(result);
+            string sqlConnection;
+            try
+            {
+                conn.Open();
+                sqlConnection = "OK";
+
+            }
+            catch(MySqlException ex)
+            {
+                sqlConnection = ex.Message;
+            }
+            finally
+            {
+                conn.Close();
+            }
+            return Ok($"Bonsai Server: OK\nSQL Server: {sqlConnection}");
         }
     }
 }

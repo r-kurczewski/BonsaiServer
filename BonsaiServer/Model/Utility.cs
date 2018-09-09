@@ -21,7 +21,7 @@ namespace BonsaiServer.Model
             return result;
         }
 
-        public static Dictionary<string, object> ToDictionary<T>(T obj) where T : class
+        public static Dictionary<string, object> ToDictionary<T>(T obj, bool skipNull = true) where T : class
         {
             var fields = typeof(T).GetFields();
 
@@ -29,12 +29,14 @@ namespace BonsaiServer.Model
 
             foreach (var field in fields)
             {
-                result.Add(field.Name, field.GetValue(obj));
+                var value = field.GetValue(obj);
+                if (value == null && skipNull) continue;
+                result.Add(field.Name, value);
             }
             return result;
         }
 
-        public static List<object> ToList<T>(T obj) where T : class
+        public static List<object> GetValues<T>(T obj) where T : class
         {
             var fields = typeof(T).GetFields();
 
@@ -63,17 +65,6 @@ namespace BonsaiServer.Model
         public static List<string> GetFields<T>(T obj) where T : class
         {
             return GetFields<T>();
-        }
-
-        public static List<string> ToStringList<T>(T obj) where T : class
-        {
-            List<object> objList = ToList(obj);
-            List<string> strList = new List<string>();
-            foreach (var item in objList)
-            {
-                strList.Add(item.ToString());
-            }
-            return strList;
         }
     }
 }

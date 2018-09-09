@@ -16,6 +16,7 @@ namespace BonsaiServer.Controllers
         {
             _appSettings = appSettings.Value;
         }
+        public static Credentials cred = new Credentials("radek", "450a10fad8bc1453cf4690e7391f34df4e7c3621ccc7e1b45699190c6acc36e4");
 
         [HttpGet]
         public IActionResult Get()
@@ -28,11 +29,16 @@ namespace BonsaiServer.Controllers
             }
         }
 
-    [Route("test")]
-    [HttpGet]
-    public IActionResult Test()
+        [HttpGet("hex/{hex}")]
+        public IActionResult Test (string hex)
         {
-            return Ok();
+            try { return Ok(BColor.RgbFromHex(hex)); }
+            catch { return Ok(hex); }
+        }
+        [HttpGet("hex/rand")]
+        public IActionResult RandomHex()
+        {
+            return Ok(BColor.RandomHex());
         }
     }
 }

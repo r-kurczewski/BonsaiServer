@@ -20,8 +20,13 @@ namespace BonsaiServer.Controllers
             _appSettings = appSettings.Value;
         }
 
-        [Route("get")]
-        [HttpPost]
+        [HttpGet("get")]
+        public IActionResult GetPlantsGET()
+        {
+            return GetPlants(DebugController.cred);
+        }
+
+        [HttpPost("get")]
         public IActionResult GetPlants([FromBody]Credentials cred)
         {
             MySqlConnection conn = new MySqlConnection(_appSettings.DefaultConnection);
@@ -38,8 +43,10 @@ namespace BonsaiServer.Controllers
                 cmd.Parameters.AddWithValue("@login", cred.login);
                 cmd.Parameters.AddWithValue("@password", cred.password);
                 var rdr = cmd.ExecuteReader();
+                //if (!rdr.HasRows) return NoContent();
                 while (rdr.Read())
                     result.Add(SQLHelper.GetObject<Plant>(rdr));
+                rdr.Close();
                 return Ok(result);
             }
             catch (Exception ex)

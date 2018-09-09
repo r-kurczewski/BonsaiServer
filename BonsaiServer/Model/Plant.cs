@@ -12,12 +12,14 @@ namespace BonsaiServer.Model
         public int id;
         public string name;
         public int leaves_id;
-        public int leaves_color;
         public int flower_id;
-        public int flower_color;
-        public int stalk_color;
-        public int pot_color;
-        public int dirt_color;
+        public string leaves_color;
+        public string flower_color;
+        public string stalk_color;
+        public string pot_color;
+        public string dirt_color;
+        public Rarity.Tier rarity;
         public int slot;
+
     }
 }

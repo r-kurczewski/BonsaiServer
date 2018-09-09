@@ -37,5 +37,11 @@ namespace BonsaiServer.Model
     {
         public Credentials cred;
         public T data;
+
+        public AuthData(Credentials cred, T data)
+        {
+            this.cred = cred;
+            this.data = data;
+        }
     }
 }

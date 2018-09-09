@@ -24,6 +24,7 @@ namespace BonsaiServer.Model
             }
             newPlant.slot = 0;
             newPlant.name = GenerateName(newPlant);
+            //newPlant.pot_color = "f95";
             return newPlant;
         }
 

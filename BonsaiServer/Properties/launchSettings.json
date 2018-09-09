@@ -1,45 +1,41 @@
 {
-  "iisSettings": {
+  "iisSettings": 
+  {
     "windowsAuthentication": false,
     "anonymousAuthentication": true,
-    "iisExpress": {
-      "applicationUrl": "http://localhost:54103/",
+    "iisExpress": 
+    {
+      "applicationUrl": "http://localhost:50429/",
       "sslPort": 0
     }
   },
-  "profiles": {
-    "GET": {
+  "profiles": 
+  {
+    "POST": 
+    {
       "commandName": "IISExpress",
-      "launchBrowser": true,
-      "launchUrl": "",
+      "launchBrowser": false,
       "environmentVariables": {
         "ASPNETCORE_ENVIRONMENT": "Development"
       }
     },
-      "POST": {
-        "commandName": "IISExpress",
-        "launchBrowser": false,
-        "launchUrl": "",
-        "environmentVariables": {
-          "ASPNETCORE_ENVIRONMENT": "Development"
-        }
+    "GET": 
+    {
+      "commandName": "IISExpress",
+      "environmentVariables": 
+      {
+        "ASPNETCORE_ENVIRONMENT": "Development"
       },
-      "Production": {
-        "commandName": "IISExpress",
-        "launchBrowser": true,
-        "launchUrl": "",
-        "environmentVariables": {
-          "ASPNETCORE_ENVIRONMENT": "Production"
-        }
-      },
-      "WebApplication1": {
+      "launchBrowser": true
+    },
+      "BonsaiServer": {
         "commandName": "Project",
         "launchBrowser": true,
-        "launchUrl": "api/values",
-        "environmentVariables": {
+        "environmentVariables": 
+        {
           "ASPNETCORE_ENVIRONMENT": "Development"
         },
-        "applicationUrl": "http://localhost:54104/"
+        "applicationUrl": "http://localhost:50430/"
       }
     }
   }

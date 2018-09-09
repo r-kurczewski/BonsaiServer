@@ -1,5 +1,6 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Threading.Tasks;
 using BonsaiServer.Model;
@@ -9,7 +10,7 @@ using MySql.Data.MySqlClient;
 
 namespace BonsaiServer.Controllers
 {
-    [Route("{controller}")]
+    [Route("[controller]")]
     public class ShopController : Controller
     {
         private readonly AppSettings _appSettings;
@@ -30,7 +31,7 @@ namespace BonsaiServer.Controllers
                 if (!SQLHelper.IsUserPlant(data.data, userID, conn)) return StatusCode(403, "Unauthorized.");
                 var sql = @"SELECT value FROM rarity 
                             INNER JOIN plants ON (plants.rarity = rarity.name)
-                            WHERE id = @id";
+                            WHERE plants.id = @id";
                 var cmd = new MySqlCommand(sql, conn);
                 cmd.Parameters.AddWithValue("@id", data.data);
                 var rdr = cmd.ExecuteReader();
@@ -48,7 +49,8 @@ namespace BonsaiServer.Controllers
             }
             catch (MySqlException ex)
             {
-                return StatusCode(500, ex.Message);
+                var line = new StackTrace(ex, true).GetFrame(0).ToString();
+                return StatusCode(500, ex.Message + " " + line);
             }
             finally
             {
@@ -58,7 +60,7 @@ namespace BonsaiServer.Controllers
 
         [Route("getMoney")]
         [HttpPost]
-        public IActionResult GetMoney(Credentials cred)
+        public IActionResult GetMoney([FromBody] Credentials cred)
         {
             var conn = new MySqlConnection(_appSettings.DefaultConnection);
             try
@@ -72,6 +74,7 @@ namespace BonsaiServer.Controllers
                 rdr.Read();
                 money[0] = rdr.GetInt32(0);
                 money[1] = rdr.GetInt32(1);
+                rdr.Close();
                 return Ok(money);
             }
             catch(MySqlException ex)
