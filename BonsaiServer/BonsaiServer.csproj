@@ -9,9 +9,17 @@
     <Content Remove="App.config" />
   </ItemGroup>
   <ItemGroup>
+    <Folder Include="Areas\Plant\Controllers\" />
+    <Folder Include="Areas\Plant\Data\" />
+    <Folder Include="Areas\Plant\Models\" />
+    <Folder Include="Areas\Plant\Views\" />
+    <Folder Include="Areas\Shop\Data\" />
+    <Folder Include="Areas\Shop\Models\" />
+    <Folder Include="Areas\Shop\Views\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>
+    <PackageReference Include="AspNetCore.RouteAnalyzer" Version="0.5.1" />
     <PackageReference Include="Microsoft.AspNetCore.All" Version="2.0.8" />
     <PackageReference Include="Microsoft.VisualStudio.Web.CodeGeneration.Design" Version="2.0.3" />
     <PackageReference Include="MySql.Data" Version="8.0.11" />

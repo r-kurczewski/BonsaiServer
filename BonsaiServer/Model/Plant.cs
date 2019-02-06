@@ -18,8 +18,7 @@ namespace BonsaiServer.Model
         public string stalk_color;
         public string pot_color;
         public string dirt_color;
-        public Rarity.Tier rarity;
+        public int rarity;
         public int slot;
-
     }
 }

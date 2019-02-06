@@ -32,12 +32,21 @@ namespace BonsaiServer.Controllers
                 var sql = $"INSERT INTO users(login, password, email) VALUES ('{cred.login}', '{cred.password}', '{cred.email}')";
                 var cmd = new MySqlCommand(sql, conn);
                 var  rdr = cmd.ExecuteNonQuery();
-                #region add start plants
+                #region start plants
                 var userID = SQLHelper.GetUserID(cred, conn);
                 sql = $@"INSERT INTO plants(`userID`, `name`, `leaves_id`, `flower_id`, `leaves_color`, `flower_color`, `stalk_color`, `pot_color`, `dirt_color`, `rarity`, `slot`) VALUES
                          ('{userID}', 'Red', '1', '1', 'f11', 'f11', 'f11', 'f95', 'f11', '5', '1'),
-                         ('{userID}', 'Green', '1', '1', '1f1', '1f1', '1f1', 'f95', '1f1', '1', '2'),
-                         ('{userID}', 'Blue', '1', '1', '11f', '11f', '11f', 'f95', '11f', '4', '3')";
+                         ('{userID}', 'Green', '1', '2', '1f1', '1f1', '1f1', 'f95', '1f1', '1', '2'),
+                         ('{userID}', 'Blue', '1', '3', '11f', '11f', '11f', 'f95', '11f', '4', '3'),
+                         ('{userID}', 'Example', '1', '1', '9f1', '13d', '3b1', 'f95', '531', '5', '4');
+                         ";
+                cmd = new MySqlCommand(sql, conn);
+                cmd.ExecuteNonQuery();
+                #endregion
+                #region start curency
+                var startGold = 100;
+                var startGems = 10;
+                sql = $"INSERT INTO currencies(userID, gold, gems) VALUES ({userID}, {startGold}, {startGems})";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
                 #endregion

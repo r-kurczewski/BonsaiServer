@@ -24,7 +24,8 @@ namespace BonsaiServer.Model
             }
             newPlant.slot = 0;
             newPlant.name = GenerateName(newPlant);
-            //newPlant.pot_color = "f95";
+            newPlant.pot_color = "f95";
+            newPlant.rarity = (int)GetRarity(newPlant);
             return newPlant;
         }
 
@@ -44,6 +45,11 @@ namespace BonsaiServer.Model
                 result.Add(typeof(Plant).GetField(field).GetValue(plant).ToString());
             }
             return result;
+        }
+
+        private static Rarity.Tier GetRarity(Plant plant)
+        {
+            return Rarity.Tier.Premium;
         }
     }
 }

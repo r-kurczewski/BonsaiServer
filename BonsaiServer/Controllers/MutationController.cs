@@ -94,6 +94,7 @@ namespace BonsaiServer.Controllers
         [HttpPost("collect")]
         public IActionResult Collect([FromBody] AuthData<int> data)
         {
+            var debug = "1";
             var conn = new MySqlConnection(_appSettings.DefaultConnection);
             try
             {
@@ -105,8 +106,6 @@ namespace BonsaiServer.Controllers
                             INNER JOIN users ON (users.userID = plants.userID)
                             WHERE plants.userID = {userID} AND mutations.id = @id";
                 var cmd = new MySqlCommand(sql, conn);
-                cmd.Parameters.AddWithValue("@login", data.cred.login);
-                cmd.Parameters.AddWithValue("@password", data.cred.password);
                 cmd.Parameters.AddWithValue("@id", data.data);
                 var rdr = cmd.ExecuteReader();
                 while (rdr.Read())
@@ -114,10 +113,12 @@ namespace BonsaiServer.Controllers
                     plants.Add(SQLHelper.GetObject<Plant>(rdr));
                 }
                 rdr.Close();
+                debug = "2";
                 var newPlant = MutationScript.Cross(plants);
                 var plantDict = Utility.ToDictionary(newPlant);
                 var plantFields = $"`{String.Join("`, `", plantDict.Keys)}`";
                 var plantValues = $"'{String.Join("', '", plantDict.Values)}'";
+                debug = "3";
                 sql = $@"INSERT INTO plants(userID, {plantFields}) VALUES ({userID}, {plantValues})";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -131,7 +132,7 @@ namespace BonsaiServer.Controllers
                 switch (ex.ErrorCode)
                 {
                     default:
-                        return StatusCode(500, ex.Message);
+                        return StatusCode(500, ex.Message + debug);
                 }
             }
             finally
