@@ -46,5 +46,28 @@ namespace BonsaiServer.Model
             return result;
         }
 
+        public static bool LoginExist(string login, MySqlConnection conn)
+        {
+            var result = false;
+            var sql = $"SELECT COUNT(*) FROM users WHERE login = '{login}'";
+            var cmd = new MySqlCommand(sql, conn);
+            var rdr = cmd.ExecuteReader();
+            rdr.Read();
+            if (rdr.GetInt32(0) > 0) result = true;
+            rdr.Close();
+            return result;
+        }
+
+        public static bool EmailExist(string email, MySqlConnection conn)
+        {
+            var result = false;
+            var sql = $"SELECT COUNT(*) FROM users WHERE email = '{email}'";
+            var cmd = new MySqlCommand(sql, conn);
+            var rdr = cmd.ExecuteReader();
+            rdr.Read();
+            if (rdr.GetInt32(0) > 0) result = true;
+            rdr.Close();
+            return result;
+        }
     }
 }

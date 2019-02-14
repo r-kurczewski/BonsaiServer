@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
-using System.Configuration;
 using BonsaiServer.Model;
 using Microsoft.Extensions.Options;
 
 namespace BonsaiServer.Controllers
 {
-    [Route("[controller]")]
-    public class MutationController : Controller
+    public class MutationController : ControllerBase
     {
         private readonly AppSettings _appSettings;
         public MutationController(IOptions<AppSettings> appSettings)
@@ -20,9 +15,7 @@ namespace BonsaiServer.Controllers
             _appSettings = appSettings.Value;
         }
 
-        
-        [HttpPost("get")]
-        public IActionResult GetMutation([FromBody] Credentials cred)
+        public IActionResult Get([FromBody] Credentials cred)
         {
             MySqlConnection conn = new MySqlConnection(_appSettings.DefaultConnection);
             var sql = "SELECT id, plant1, plant2, TIMEDIFF(end, NOW()) AS time from mutations INNER JOIN users ON(mutations.userID = users.userID) WHERE login = @login AND password = @password";
@@ -52,8 +45,7 @@ namespace BonsaiServer.Controllers
             }
         }
 
-        [HttpPost("set")]
-        public IActionResult SetMutation([FromBody] AuthData<Mutation> mutation)
+        public IActionResult Set([FromBody] AuthData<Mutation> mutation)
         {
             MySqlConnection conn = new MySqlConnection(_appSettings.DefaultConnection);
             try
@@ -84,17 +76,16 @@ namespace BonsaiServer.Controllers
         }
 
         [HttpGet("collect/{id}")]
-        public IActionResult CollectGET(int id)
+        public IActionResult Collect(int id)
         {
             var cred = new Credentials("radek", "450a10fad8bc1453cf4690e7391f34df4e7c3621ccc7e1b45699190c6acc36e4");
             var data = new AuthData<int>(cred, id);
             return Collect(data);
         }
 
-        [HttpPost("collect")]
+        [HttpPost]
         public IActionResult Collect([FromBody] AuthData<int> data)
         {
-            var debug = "1";
             var conn = new MySqlConnection(_appSettings.DefaultConnection);
             try
             {
@@ -113,12 +104,10 @@ namespace BonsaiServer.Controllers
                     plants.Add(SQLHelper.GetObject<Plant>(rdr));
                 }
                 rdr.Close();
-                debug = "2";
                 var newPlant = MutationScript.Cross(plants);
                 var plantDict = Utility.ToDictionary(newPlant);
                 var plantFields = $"`{String.Join("`, `", plantDict.Keys)}`";
                 var plantValues = $"'{String.Join("', '", plantDict.Values)}'";
-                debug = "3";
                 sql = $@"INSERT INTO plants(userID, {plantFields}) VALUES ({userID}, {plantValues})";
                 cmd = new MySqlCommand(sql, conn);
                 cmd.ExecuteNonQuery();
@@ -132,7 +121,7 @@ namespace BonsaiServer.Controllers
                 switch (ex.ErrorCode)
                 {
                     default:
-                        return StatusCode(500, ex.Message + debug);
+                        return StatusCode(500, ex.Message);
                 }
             }
             finally
@@ -141,7 +130,6 @@ namespace BonsaiServer.Controllers
             }
         }
 
-        [HttpPost("abort")]
         public IActionResult Abort([FromBody] AuthData<int> data)
         {
             var conn = new MySqlConnection(_appSettings.DefaultConnection);

@@ -1,7 +1,7 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>9540c290-82b1-43c6-ae0c-504ce9f9df4f</UserSecretsId>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
   </PropertyGroup>
@@ -9,13 +9,8 @@
     <Content Remove="App.config" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Areas\Plant\Controllers\" />
-    <Folder Include="Areas\Plant\Data\" />
-    <Folder Include="Areas\Plant\Models\" />
-    <Folder Include="Areas\Plant\Views\" />
     <Folder Include="Areas\Shop\Data\" />
     <Folder Include="Areas\Shop\Models\" />
-    <Folder Include="Areas\Shop\Views\" />
     <Folder Include="wwwroot\" />
   </ItemGroup>
   <ItemGroup>

@@ -1,18 +1,12 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
-using System.Configuration;
 using BonsaiServer.Model;
 using Microsoft.Extensions.Options;
 
 namespace BonsaiServer.Controllers
 {
-    [Route("[controller]")]
-    public class LoginController : Controller
+    public class LoginController : ControllerBase
     {
         private readonly AppSettings _appSettings;
         public LoginController(IOptions<AppSettings> appSettings)
@@ -21,7 +15,7 @@ namespace BonsaiServer.Controllers
         }
 
         [HttpPost]
-        public IActionResult Login([FromBody]Credentials cred)
+        public IActionResult Index([FromBody]Credentials cred)
         {
             MySqlConnection conn = new MySqlConnection(_appSettings.DefaultConnection);
             try

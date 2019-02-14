@@ -1,18 +1,13 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
-using System.Configuration;
 using BonsaiServer.Model;
 using Microsoft.Extensions.Options;
 
 namespace BonsaiServer.Controllers
 {
-    [Route("[controller]")]
-    public class PlantsController : Controller
+    public class PlantsController : ControllerBase
     {
         private readonly AppSettings _appSettings;
         public PlantsController(IOptions<AppSettings> appSettings)
@@ -20,14 +15,14 @@ namespace BonsaiServer.Controllers
             _appSettings = appSettings.Value;
         }
 
-        [HttpGet("get")]
-        public IActionResult GetPlantsGET()
+        [HttpGet]
+        public IActionResult Get()
         {
-            return GetPlants(DebugController.cred);
+            return Get(DebugController.cred);
         }
 
-        [HttpPost("get")]
-        public IActionResult GetPlants([FromBody]Credentials cred)
+        [HttpPost]
+        public IActionResult Get([FromBody]Credentials cred)
         {
             MySqlConnection conn = new MySqlConnection(_appSettings.DefaultConnection);
             var result = new List<Plant>();
@@ -59,9 +54,8 @@ namespace BonsaiServer.Controllers
             }
         }
 
-        [Route("move")]
         [HttpPost]
-        public IActionResult UpdateSlots([FromBody] AuthData<List<int[]>> updates)
+        public IActionResult Move([FromBody] AuthData<List<int[]>> updates)
         {
             MySqlConnection conn = new MySqlConnection(_appSettings.DefaultConnection);
             try
@@ -88,7 +82,6 @@ namespace BonsaiServer.Controllers
             }
         }
 
-        [Route("rename")]
         [HttpPost]
         public IActionResult Rename([FromBody] AuthData<Dictionary<int, string>> data)
         {

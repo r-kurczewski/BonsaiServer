@@ -1,16 +1,11 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using BonsaiServer.Model;
+﻿using BonsaiServer.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MySql.Data.MySqlClient;
 
 namespace BonsaiServer.Controllers
 {
-    [Route("")]
-    public class HomeController : Controller
+    public class HomeController : ControllerBase
     {
         private readonly AppSettings _appSettings;
         public HomeController(IOptions<AppSettings> appSettings)
@@ -19,7 +14,7 @@ namespace BonsaiServer.Controllers
         }
 
         [HttpGet]
-        public IActionResult Home()
+        public IActionResult Index()
         {
             var conn = new MySqlConnection(_appSettings.DefaultConnection);
             string sqlConnection;
@@ -37,7 +32,7 @@ namespace BonsaiServer.Controllers
             {
                 conn.Close();
             }
-            return Ok($"Bonsai Server: OK\nSQL Server: {sqlConnection}");
+            return Ok($"Bonsai Server: {_appSettings.Environment}\nSQL Server: {sqlConnection}");
         }
     }
 }

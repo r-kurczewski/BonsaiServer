@@ -1,25 +1,20 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Diagnostics;
-using System.Linq;
-using System.Threading.Tasks;
+﻿using System.Diagnostics;
 using BonsaiServer.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using MySql.Data.MySqlClient;
 
-namespace BonsaiServer.Shop.Controllers
+namespace BonsaiServer.Controllers
 {
-    //[Area("shop")]
-    public class HomeController : Controller 
+    [Area("Shop")]
+    public class PlantShop : ControllerBase
     {
         private readonly AppSettings _appSettings;
-        public HomeController(IOptions<AppSettings> appSettings)
+        public PlantShop(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
         }
 
-        [HttpPost("sell")]
         public IActionResult SellPlant([FromBody] AuthData<int> data)
         {
             var conn = new MySqlConnection(_appSettings.DefaultConnection);
@@ -57,7 +52,6 @@ namespace BonsaiServer.Shop.Controllers
             }
         }
 
-        [HttpPost("getMoney")]
         public IActionResult GetMoney([FromBody] Credentials cred)
         {
             var conn = new MySqlConnection(_appSettings.DefaultConnection);
@@ -84,8 +78,7 @@ namespace BonsaiServer.Shop.Controllers
                 conn.Close();
             }
         }
-        
-        [HttpGet("buy/{product_id}")]
+
         public IActionResult BuyPlant(int product_id)
         {
             var conn = new MySqlConnection(_appSettings.DefaultConnection);
@@ -93,7 +86,7 @@ namespace BonsaiServer.Shop.Controllers
             {
                 return Ok(product_id);
             }
-            catch(MySqlException ex)
+            catch (MySqlException ex)
             {
                 return StatusCode(500, ex.Message);
             }
@@ -101,6 +94,11 @@ namespace BonsaiServer.Shop.Controllers
             {
                 conn.Close();
             }
+        }
+
+        public IActionResult Test()
+        {
+            return Ok("Test.");
         }
     }
 }

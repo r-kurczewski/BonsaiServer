@@ -1,23 +1,17 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using MySql.Data.MySqlClient;
-using System.Configuration;
 using BonsaiServer.Model;
 using Microsoft.Extensions.Options;
-using Microsoft.AspNetCore.Mvc.ViewEngines;
 
 namespace BonsaiServer.Controllers
 {
-    [Produces("application/json")]
-    [Route("[controller]")]
-    public class GetController : Controller
+    [Route("db")]
+    public class DatabaseController : ControllerBase
     {
         private readonly AppSettings _appSettings;
-        public GetController(IOptions<AppSettings> appSettings)
+        public DatabaseController(IOptions<AppSettings> appSettings)
         {
             _appSettings = appSettings.Value;
         }
