@@ -1,38 +1,59 @@
 ﻿using BonsaiServer.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using MySql.Data.MySqlClient;
+using Microsoft.Extensions.Configuration;
+using Microsoft.EntityFrameworkCore;
+using System.Data.SqlClient;
+using System.Configuration;
+using Newtonsoft.Json;
+using System;
+using System.Linq;
 
 namespace BonsaiServer.Controllers
 {
     public class HomeController : ControllerBase
     {
-        private readonly AppSettings _appSettings;
-        public HomeController(IOptions<AppSettings> appSettings)
+        private readonly AppSettings appSettings;
+        private readonly BonsaiDbContext context;
+        public HomeController(BonsaiDbContext context, IOptions<AppSettings> appSettings)
         {
-            _appSettings = appSettings.Value;
+            this.context = context;
+            this.appSettings = appSettings.Value;
         }
 
-        [HttpGet]
         public IActionResult Index()
         {
-            var conn = new MySqlConnection(_appSettings.DefaultConnection);
-            string sqlConnection;
-            try
-            {
-                conn.Open();
-                sqlConnection = "OK";
+            string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
+            
+            return Ok($"Bonsai Server: {environment} v.{appSettings.Version}, {JsonConvert.SerializeObject(context.Plants)}");
+        }
 
-            }
-            catch(MySqlException ex)
+        
+        public ActionResult Add()
+        {
+            Plant plant = new Plant()
             {
-                sqlConnection = ex.Message;
-            }
-            finally
-            {
-                conn.Close();
-            }
-            return Ok($"Bonsai Server: {_appSettings.Environment}\nSQL Server: {sqlConnection}");
+                DirtColor = "dbd",
+                FlowerColor = "bdb",
+                FlowersId = 1,
+                LeavesColor = "bdd",
+                LeavesId = 1,
+                Name = "Politanczykowianka",
+                PotColor = "fff",
+                Rarity = Rarity.Tier.Premium,
+                Slot = 0,
+                SoilColor = "111"
+            };
+            context.Plants.Add(plant);
+            context.SaveChanges();
+            return Ok("Added plant");
+        }
+
+        public ActionResult Remove()
+        {
+            context.Plants.Remove(context.Plants.Last());
+            context.SaveChanges();
+            return Ok("Removed last plant");
         }
     }
 }

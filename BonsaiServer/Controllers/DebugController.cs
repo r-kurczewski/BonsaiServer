@@ -24,17 +24,5 @@ namespace BonsaiServer.Controllers
                 return Ok("Access denied.");
             }
         }
-
-        [HttpGet("hex/{hex}")]
-        public IActionResult Test (string hex)
-        {
-            try { return Ok(BColor.RgbFromHex(hex)); }
-            catch { return Ok(hex); }
-        }
-        [HttpGet("hex/rand")]
-        public IActionResult RandomHex()
-        {
-            return Ok(BColor.RandomHex());
-        }
     }
 }

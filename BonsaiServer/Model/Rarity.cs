@@ -2,12 +2,11 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
-
 namespace BonsaiServer.Model
 {
     public class Rarity
     {
-        public enum Tier
+        public enum Tier : byte
         {
             Common,
             Uncommon,
@@ -19,7 +18,7 @@ namespace BonsaiServer.Model
 
         public static Tier FromPlant(Plant plant)
         {
-            return Tier.Common;
+            return plant.Rarity;
         }
     }
 }

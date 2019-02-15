@@ -9,5 +9,6 @@ namespace BonsaiServer.Model
     {
         public string Environment { get; set; }
         public string DefaultConnection { get; set; }
+        public string Version { get; set; }
     }
 }

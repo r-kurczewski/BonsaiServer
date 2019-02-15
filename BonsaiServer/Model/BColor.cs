@@ -66,17 +66,5 @@ namespace BonsaiServer.Model
             }
             return true;
         }
-
-        public static string RandomHex()
-        {
-            var builder = new StringBuilder();
-            var rand = new Random();
-            for(int i=0; i<3; i++)
-            {
-                int r = rand.Next(chars.Length);
-                builder.Append(chars[r]);
-            }
-            return builder.ToString();
-        }
     }
 }

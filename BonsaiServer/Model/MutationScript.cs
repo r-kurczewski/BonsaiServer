@@ -22,10 +22,10 @@ namespace BonsaiServer.Model
                 FieldInfo field = newPlant.GetType().GetField(fieldName);
                 field.SetValue(newPlant, field.GetValue(plants[rnd.Next(0,2)]));
             }
-            newPlant.slot = 0;
-            newPlant.name = GenerateName(newPlant);
-            newPlant.pot_color = "f95";
-            newPlant.rarity = (int)GetRarity(newPlant);
+            newPlant.Slot = 0;
+            newPlant.Name = GenerateName(newPlant);
+            newPlant.PotColor = "f95";
+            newPlant.Rarity = GetRarity(newPlant);
             return newPlant;
         }
 

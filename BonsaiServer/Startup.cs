@@ -5,12 +5,14 @@ using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 namespace BonsaiServer
 {
     public class Startup
     {
         public IConfiguration Configuration { get; private set; }
+        public IHostingEnvironment HostingEnvironment { get; private set; }
 
         public Startup(IHostingEnvironment env)
         {
@@ -29,8 +31,8 @@ namespace BonsaiServer
              .AddJsonOptions(options => {
                  options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
              });
-            services.Configure<AppSettings>(Configuration.GetSection("ConnectionStrings"));
             services.Configure<AppSettings>(Configuration.GetSection("Settings"));
+            services.AddDbContext<BonsaiDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRouteAnalyzer();
 
         }
@@ -38,10 +40,10 @@ namespace BonsaiServer
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.
         public void Configure(IApplicationBuilder app, IHostingEnvironment env)
         {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+            //if (env.IsDevelopment())
+            //{
+            app.UseDeveloperExceptionPage();
+            //}
             app.UseMvc(routes =>
             {
                 routes.MapRoute(
