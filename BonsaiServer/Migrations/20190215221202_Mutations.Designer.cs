@@ -12,8 +12,8 @@ using System;
 namespace BonsaiServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190215200620_Users")]
-    partial class Users
+    [Migration("20190215221202_Mutations")]
+    partial class Mutations
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -22,7 +22,27 @@ namespace BonsaiServer.Migrations
                 .HasAnnotation("ProductVersion", "2.0.3-rtm-10026")
                 .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-            modelBuilder.Entity("BonsaiServer.Model.Plant", b =>
+            modelBuilder.Entity("BonsaiServer.Database.Mutation", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<DateTime>("End");
+
+                    b.Property<int>("Plant1");
+
+                    b.Property<int>("Plant2");
+
+                    b.Property<DateTime>("Start");
+
+                    b.Property<int>("UserId");
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Mutations");
+                });
+
+            modelBuilder.Entity("BonsaiServer.Database.Plant", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
@@ -53,21 +73,23 @@ namespace BonsaiServer.Migrations
                     b.Property<string>("SoilColor")
                         .HasMaxLength(3);
 
+                    b.Property<int>("UserId");
+
                     b.HasKey("Id");
 
                     b.ToTable("Plants");
                 });
 
-            modelBuilder.Entity("BonsaiServer.Model.User", b =>
+            modelBuilder.Entity("BonsaiServer.Database.UserCredentials", b =>
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd();
 
                     b.Property<string>("Email")
-                        .HasMaxLength(30);
+                        .HasMaxLength(32);
 
                     b.Property<string>("Login")
-                        .HasMaxLength(20);
+                        .HasMaxLength(16);
 
                     b.Property<string>("PasswordHash")
                         .HasMaxLength(64);

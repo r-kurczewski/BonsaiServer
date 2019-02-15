@@ -5,7 +5,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace BonsaiServer.Model
+namespace BonsaiServer.Models
 {
     public class BColor
     {

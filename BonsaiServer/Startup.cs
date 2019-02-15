@@ -1,11 +1,12 @@
 ﻿using AspNetCore.RouteAnalyzer;
-using BonsaiServer.Model;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.AspNetCore.Hosting;
 using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
+using BonsaiServer.Models;
+using BonsaiServer.Database;
 
 namespace BonsaiServer
 {
@@ -32,7 +33,7 @@ namespace BonsaiServer
                  options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
              });
             services.Configure<AppSettings>(Configuration.GetSection("Settings"));
-            services.AddDbContext<BonsaiDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
+            services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRouteAnalyzer();
 
         }

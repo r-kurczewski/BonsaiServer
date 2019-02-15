@@ -1,10 +1,14 @@
-﻿using System.ComponentModel.DataAnnotations;
+﻿using System;
+using System.ComponentModel.DataAnnotations;
+using BonsaiServer.Models;
 
-namespace BonsaiServer.Model
+namespace BonsaiServer.Database
 {
+    [Serializable]
     public class Plant
     {
         public int Id { get; set; }
+        public int UserId { get; set; }
         [StringLength(20)] public string Name { get; set; }
         public byte LeavesId { get; set; }
         public byte FlowersId { get; set; }

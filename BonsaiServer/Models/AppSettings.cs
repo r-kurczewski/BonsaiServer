@@ -3,12 +3,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BonsaiServer.Model
+namespace BonsaiServer.Models
 {
     public class AppSettings
     {
-        public string Environment { get; set; }
-        public string DefaultConnection { get; set; }
         public string Version { get; set; }
     }
 }

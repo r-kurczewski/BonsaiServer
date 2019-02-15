@@ -1,27 +1,24 @@
-﻿using BonsaiServer.Model;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using System;
-using System.Linq;
+using BonsaiServer.Models;
+using BonsaiServer.Database;
 
 namespace BonsaiServer.Controllers
 {
     public class HomeController : ControllerBase
     {
         private readonly AppSettings appSettings;
-        private readonly BonsaiDbContext context;
-        public HomeController(BonsaiDbContext context, IOptions<AppSettings> appSettings)
+        private readonly IPlantsRepository plantsRepository;
+        public HomeController(IPlantsRepository plantsRepository, IOptions<AppSettings> appSettings)
         {
-            this.context = context;
+            this.plantsRepository = plantsRepository;
             this.appSettings = appSettings.Value;
         }
 
         public IActionResult Index()
         {
-            
-            
-            return Ok($"Bonsai Server: v.{appSettings.Version}, {JsonConvert.SerializeObject(context.Plants)}");
+            return Ok($"Bonsai Server: v.{appSettings.Version}, {JsonConvert.SerializeObject(plantsRepository.GetPlants())}");
         }
 
         
@@ -40,15 +37,14 @@ namespace BonsaiServer.Controllers
                 Slot = 0,
                 SoilColor = "111"
             };
-            context.Plants.Add(plant);
-            context.SaveChanges();
+            plantsRepository.AddPlant(plant);
+            
             return Ok("Added plant");
         }
 
         public ActionResult Remove()
         {
-            context.Plants.Remove(context.Plants.Last());
-            context.SaveChanges();
+            plantsRepository.RemoveLastPlant();
             return Ok("Removed last plant");
         }
     }

@@ -3,12 +3,18 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Threading.Tasks;
 
-namespace BonsaiServer.Model
+namespace BonsaiServer.Database
 {
-    interface IPlantsRepository
+    public interface IPlantsRepository
     {
         IEnumerable<Plant> GetPlants();
 
         Plant GetPlantById(int id);
+
+        void RemoveLastPlant();
+
+        void RemovePlantById(int id);
+
+        void AddPlant(Plant plant);
     }
 }

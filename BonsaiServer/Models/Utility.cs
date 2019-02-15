@@ -1,11 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Reflection;
-using System.Threading.Tasks;
-using MySql.Data.MySqlClient;
 
-namespace BonsaiServer.Model
+namespace BonsaiServer.Models
 {
     public class Utility
     {
