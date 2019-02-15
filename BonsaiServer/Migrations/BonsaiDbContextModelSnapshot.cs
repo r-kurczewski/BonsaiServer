@@ -11,10 +11,9 @@ using System;
 namespace BonsaiServer.Migrations
 {
     [DbContext(typeof(BonsaiDbContext))]
-    [Migration("20190214203804_2")]
-    partial class _2
+    partial class BonsaiDbContextModelSnapshot : ModelSnapshot
     {
-        protected override void BuildTargetModel(ModelBuilder modelBuilder)
+        protected override void BuildModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -55,6 +54,25 @@ namespace BonsaiServer.Migrations
                     b.HasKey("Id");
 
                     b.ToTable("Plants");
+                });
+
+            modelBuilder.Entity("BonsaiServer.Model.User", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd();
+
+                    b.Property<string>("Email")
+                        .HasMaxLength(30);
+
+                    b.Property<string>("Login")
+                        .HasMaxLength(20);
+
+                    b.Property<string>("PasswordHash")
+                        .HasMaxLength(64);
+
+                    b.HasKey("Id");
+
+                    b.ToTable("Users");
                 });
 #pragma warning restore 612, 618
         }

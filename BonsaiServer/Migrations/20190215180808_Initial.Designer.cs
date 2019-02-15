@@ -11,8 +11,8 @@ using System;
 namespace BonsaiServer.Migrations
 {
     [DbContext(typeof(BonsaiDbContext))]
-    [Migration("20190214184036_Plant1")]
-    partial class Plant1
+    [Migration("20190215180808_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {

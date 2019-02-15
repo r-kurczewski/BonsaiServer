@@ -1,10 +1,14 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Project Sdk="Microsoft.NET.Sdk.Web">
   <PropertyGroup>
-    <TargetFramework>netcoreapp2.0</TargetFramework>
+    <TargetFramework>netcoreapp2.1</TargetFramework>
     <UserSecretsId>9540c290-82b1-43c6-ae0c-504ce9f9df4f</UserSecretsId>
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
   </PropertyGroup>
+  <ItemGroup>
+    <Compile Remove="Migrations\20190215200047_Users.cs" />
+    <Compile Remove="Migrations\20190215200047_Users.Designer.cs" />
+  </ItemGroup>
   <ItemGroup>
     <Content Remove="App.config" />
   </ItemGroup>

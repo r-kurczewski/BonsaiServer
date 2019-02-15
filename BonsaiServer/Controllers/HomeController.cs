@@ -1,10 +1,6 @@
 ﻿using BonsaiServer.Model;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.Extensions.Options;
-using Microsoft.Extensions.Configuration;
-using Microsoft.EntityFrameworkCore;
-using System.Data.SqlClient;
-using System.Configuration;
 using Newtonsoft.Json;
 using System;
 using System.Linq;
@@ -23,9 +19,9 @@ namespace BonsaiServer.Controllers
 
         public IActionResult Index()
         {
-            string environment = Environment.GetEnvironmentVariable("ASPNETCORE_ENVIRONMENT");
             
-            return Ok($"Bonsai Server: {environment} v.{appSettings.Version}, {JsonConvert.SerializeObject(context.Plants)}");
+            
+            return Ok($"Bonsai Server: v.{appSettings.Version}, {JsonConvert.SerializeObject(context.Plants)}");
         }
 
         
