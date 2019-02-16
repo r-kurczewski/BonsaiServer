@@ -1,9 +1,5 @@
-﻿using System;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using MySql.Data.MySqlClient;
-using BonsaiServer.Models;
-using Microsoft.Extensions.Options;
 using BonsaiServer.Database;
 using System.Linq;
 
@@ -11,15 +7,15 @@ namespace BonsaiServer.Controllers
 {
     public class PlantsController : ControllerBase
     {
-        private readonly IPlantRepository plantRepository;
+        private readonly IPlantRepository repository;
         public PlantsController(IPlantRepository repository)
         {
-            this.plantRepository = repository;
+            this.repository = repository;
         }
         [HttpPost]
         public IActionResult Get([FromBody] Session session)
         {
-            List<Plant> plants = plantRepository.GetPlantsOfUser(session).ToList();
+            List<Plant> plants = repository.GetPlantsOfUser(session).ToList();
             if(plants.Count == 0)
             {
 

@@ -22,7 +22,7 @@ namespace BonsaiServer.Controllers
             return Ok($"Bonsai Server: v.{appSettings.Version}, {JsonConvert.SerializeObject(plantsRepository.GetPlants())}");
         }
 
-        
+
         public ActionResult Add()
         {
             Plant plant = new Plant()
@@ -39,7 +39,7 @@ namespace BonsaiServer.Controllers
                 Slot = 0,
             };
             plantsRepository.AddPlant(plant);
-            
+
             return Ok("Added plant");
         }
 

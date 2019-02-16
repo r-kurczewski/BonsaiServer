@@ -34,10 +34,10 @@ namespace BonsaiServer
              });
             services.Configure<Models.AppSettings>(Configuration.GetSection("Settings"));
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddRouteAnalyzer();
             services.AddTransient<IPlantRepository,PlantRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IMutationRepository, MutationRepository>();
+            services.AddRouteAnalyzer();
 
         }
 
@@ -50,16 +50,16 @@ namespace BonsaiServer
             //}
             app.UseMvc(routes =>
             {
+                routes.MapRouteAnalyzer("/routes");
+
                 routes.MapRoute(
                  name: "areas",
                  template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                );
 
-                routes.MapRoute(
-                    name: "default",
-                    template: "{controller=Home}/{action=Index}/{id?}");
-
-                routes.MapRouteAnalyzer("/routes");
+            routes.MapRoute(
+             name: "default",
+             template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

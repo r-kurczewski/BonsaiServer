@@ -1,6 +1,6 @@
 ﻿using System;
 using Microsoft.AspNetCore.Mvc;
-using MySql.Data.MySqlClient;
+
 using BonsaiServer.Models;
 using Microsoft.Extensions.Options;
 using BonsaiServer.Database;

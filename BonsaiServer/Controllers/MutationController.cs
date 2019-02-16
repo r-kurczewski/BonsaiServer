@@ -1,7 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using Microsoft.AspNetCore.Mvc;
-using MySql.Data.MySqlClient;
+
 using Microsoft.Extensions.Options;
 using BonsaiServer.Models;
 using BonsaiServer.Database;
