@@ -7,5 +7,6 @@ namespace BonsaiServer.Database
 {
     interface IMutationRepository
     {
+        Mutation GetMutationbyId(int id);
     }
 }

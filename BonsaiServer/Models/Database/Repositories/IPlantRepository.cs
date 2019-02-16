@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 
 namespace BonsaiServer.Database
 {
-    public interface IPlantsRepository
+    public interface IPlantRepository
     {
         IEnumerable<Plant> GetPlants();
 
         Plant GetPlantById(int id);
+
+        IEnumerable<Plant> GetPlantsOfUser(Session session);
 
         void RemoveLastPlant();
 

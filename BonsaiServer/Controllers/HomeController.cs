@@ -3,14 +3,15 @@ using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using BonsaiServer.Models;
 using BonsaiServer.Database;
+using System;
 
 namespace BonsaiServer.Controllers
 {
     public class HomeController : ControllerBase
     {
         private readonly AppSettings appSettings;
-        private readonly IPlantsRepository plantsRepository;
-        public HomeController(IPlantsRepository plantsRepository, IOptions<AppSettings> appSettings)
+        private readonly IPlantRepository plantsRepository;
+        public HomeController(IPlantRepository plantsRepository, IOptions<AppSettings> appSettings)
         {
             this.plantsRepository = plantsRepository;
             this.appSettings = appSettings.Value;
@@ -26,16 +27,16 @@ namespace BonsaiServer.Controllers
         {
             Plant plant = new Plant()
             {
-                DirtColor = "dbd",
-                FlowerColor = "bdb",
+                Name = DateTime.Now.ToString(),
                 FlowersId = 1,
-                LeavesColor = "bdd",
                 LeavesId = 1,
-                Name = "Politanczykowianka",
-                PotColor = "fff",
+                LeavesColor = BColor.RandomColor(),
+                FlowerColor = BColor.RandomColor(),
+                DirtColor = BColor.RandomColor(),
+                SoilColor = BColor.RandomColor(),
+                PotColor = BColor.RandomColor(),
                 Rarity = Rarity.Tier.Premium,
                 Slot = 0,
-                SoilColor = "111"
             };
             plantsRepository.AddPlant(plant);
             

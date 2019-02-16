@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BonsaiServer.Database
 {
-    public class UserRepository : IUserRepository
+    public class UserRepository : IUsersRepository
     {
         private readonly AppDbContext context;
 
@@ -15,14 +15,20 @@ namespace BonsaiServer.Database
             this.context = context;
         }
 
-        public UserCredentials GetOwnerOfPlant(Plant plant)
+        public User GetOwnerOfPlant(Plant plant)
         {
-            return context.Users.Find(plant.UserId);
+            return context.Users.Find(plant.User);
         }
 
-        public UserCredentials GetUserById(int id)
+
+        public User GetUserById(int id)
         {
             return context.Users.Find(id);
+        }
+
+        public int GetUserBySession(Session session)
+        {
+            return context.Users.FirstOrDefault(s => s.Id == session.User.Id).Id;
         }
 
         public bool IsEmailUsed(string email)

@@ -5,11 +5,13 @@ using System.Threading.Tasks;
 
 namespace BonsaiServer.Database
 {
-    public interface IUserRepository
+    public interface IUsersRepository
     {
-        UserCredentials GetUserById(int id);
+        User GetUserById(int id);
 
-        UserCredentials GetOwnerOfPlant(Plant plant);
+        User GetOwnerOfPlant(Plant plant);
+
+        int GetUserBySession(Session session);
 
         bool IsLoginUsed(string login);
 

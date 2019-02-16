@@ -50,9 +50,9 @@ namespace BonsaiServer.Models
         public static int[] RgbFromHex(string hex)
         {
             if (!ValidColor(hex)) return null;
-            int r = Convert.ToInt32(new String(new char[] { hex[0], 'f' }), 16);
-            int g = Convert.ToInt32(new String(new char[] { hex[1], 'f' }), 16);
-            int b = Convert.ToInt32(new String(new char[] { hex[2], 'f' }), 16);
+            int r = Convert.ToInt32(new string(new char[] { hex[0], 'f' }), 16);
+            int g = Convert.ToInt32(new string(new char[] { hex[1], 'f' }), 16);
+            int b = Convert.ToInt32(new string(new char[] { hex[2], 'f' }), 16);
             return new int[] {r,g,b};
         }
 
@@ -65,6 +65,17 @@ namespace BonsaiServer.Models
                 if (!chars.Contains(ch)) return false;
             }
             return true;
+        }
+
+        public static string RandomColor()
+        {
+            var rand = new Random();
+            string color = "";
+            for (int i = 0; i<3; i++)
+            {
+                color += chars[rand.Next(0, chars.Length)];
+            }
+            return color;
         }
     }
 }

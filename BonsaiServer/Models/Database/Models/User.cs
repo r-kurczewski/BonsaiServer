@@ -4,7 +4,7 @@ using System.ComponentModel.DataAnnotations;
 namespace BonsaiServer.Database
 {
     [Serializable]
-    public class UserCredentials
+    public class User
     {
         public int Id { get; set; }
         [MaxLength(16)] public string Login { get; set; }

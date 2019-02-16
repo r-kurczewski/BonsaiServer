@@ -5,55 +5,35 @@ using MySql.Data.MySqlClient;
 using BonsaiServer.Models;
 using Microsoft.Extensions.Options;
 using BonsaiServer.Database;
+using System.Linq;
 
 namespace BonsaiServer.Controllers
 {
     public class PlantsController : ControllerBase
     {
-        //private readonly AppSettings _appSettings;
-        //public PlantsController(IOptions<AppSettings> appSettings)
-        //{
-        //    _appSettings = appSettings.Value;
-        //}
+        private readonly IPlantRepository plantRepository;
+        public PlantsController(IPlantRepository repository)
+        {
+            this.plantRepository = repository;
+        }
+        [HttpPost]
+        public IActionResult Get([FromBody] Session session)
+        {
+            List<Plant> plants = plantRepository.GetPlantsOfUser(session).ToList();
+            if(plants.Count == 0)
+            {
 
-        //[HttpGet]
-        //public IActionResult Get()
-        //{
-        //    return Get(DebugController.cred);
-        //}
+            }
+            else if(plants.Count > 0)
+            {
 
-        //[HttpPost]
-        //public IActionResult Get([FromBody]UserCredentials cred)
-        //{
-        //    MySqlConnection conn = new MySqlConnection(_appSettings.DefaultConnection);
-        //    var result = new List<Plant>();
-        //    try
-        //    {
-        //        conn.Open();
-        //        var fields = Utility.GetFields<Plant>();
-        //        var select = String.Join(", ", fields);
-        //        var sql = $@"SELECT {select} FROM plants 
-        //                     INNER JOIN users ON (users.userID = plants.userID) 
-        //                     WHERE login = @login AND password = @password ORDER BY id ASC";
-        //        var cmd = new MySqlCommand(sql, conn);
-        //        cmd.Parameters.AddWithValue("@login", cred.login);
-        //        cmd.Parameters.AddWithValue("@password", cred.password);
-        //        var rdr = cmd.ExecuteReader();
-        //        //if (!rdr.HasRows) return NoContent();
-        //        while (rdr.Read())
-        //            result.Add(UserRepository.GetObject<Plant>(rdr));
-        //        rdr.Close();
-        //        return Ok(result);
-        //    }
-        //    catch (Exception ex)
-        //    {
-        //        return StatusCode(500, ex.ToString());
-        //    }
-        //    finally
-        //    {
-        //        conn.Close();
-        //    }
-        //}
+            }
+            else
+            {
+
+            }
+            return Ok();
+        }
 
         //[HttpPost]
         //public IActionResult Move([FromBody] AuthData<List<int[]>> updates)

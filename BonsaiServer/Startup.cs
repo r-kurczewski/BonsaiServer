@@ -5,7 +5,7 @@ using Microsoft.Extensions.Configuration;
 using Microsoft.Extensions.DependencyInjection;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
-using BonsaiServer.Models;
+
 using BonsaiServer.Database;
 
 namespace BonsaiServer
@@ -32,9 +32,12 @@ namespace BonsaiServer
              .AddJsonOptions(options => {
                  options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
              });
-            services.Configure<AppSettings>(Configuration.GetSection("Settings"));
+            services.Configure<Models.AppSettings>(Configuration.GetSection("Settings"));
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRouteAnalyzer();
+            services.AddTransient<IPlantRepository,PlantRepository>();
+            services.AddTransient<IUsersRepository, UserRepository>();
+            services.AddTransient<IMutationRepository, MutationRepository>();
 
         }
 

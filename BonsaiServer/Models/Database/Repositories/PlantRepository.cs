@@ -3,11 +3,11 @@ using System.Linq;
 
 namespace BonsaiServer.Database
 {
-    public class PlantsRepository : IPlantsRepository
+    public class PlantRepository : IPlantRepository
     {
         private readonly AppDbContext context;
 
-        public PlantsRepository(AppDbContext context)
+        public PlantRepository(AppDbContext context)
         {
             this.context = context;
         }
@@ -28,10 +28,19 @@ namespace BonsaiServer.Database
             return context.Plants;
         }
 
+        public IEnumerable<Plant> GetPlantsOfUser(Session session)
+        {
+            session = context.Sessions.FirstOrDefault(s => s.SessionHash == session.SessionHash);
+            return context.Plants.Where(plant => plant.User == session.User);
+        }
+
         public void RemoveLastPlant()
         {
-            context.Remove(context.Plants.Last());
-            context.SaveChanges();
+            if (context.Plants.Count() > 0)
+            { 
+                context.Remove(context.Plants.Last());
+                context.SaveChanges();
+            }
         }
 
         public void RemovePlantById(int id)

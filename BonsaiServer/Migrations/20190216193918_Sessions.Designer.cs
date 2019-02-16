@@ -12,9 +12,10 @@ using System;
 namespace BonsaiServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class BonsaiDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190216193918_Sessions")]
+    partial class Sessions
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
