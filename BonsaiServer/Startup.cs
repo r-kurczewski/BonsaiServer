@@ -36,7 +36,7 @@ namespace BonsaiServer
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
             services.AddRouteAnalyzer();
             services.AddTransient<IPlantRepository,PlantRepository>();
-            services.AddTransient<IUsersRepository, UserRepository>();
+            services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IMutationRepository, MutationRepository>();
 
         }

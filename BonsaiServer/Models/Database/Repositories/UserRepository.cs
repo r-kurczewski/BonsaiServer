@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace BonsaiServer.Database
 {
-    public class UserRepository : IUsersRepository
+    public class UserRepository : IUserRepository
     {
         private readonly AppDbContext context;
 
@@ -29,6 +29,11 @@ namespace BonsaiServer.Database
         public int GetUserBySession(Session session)
         {
             return context.Users.FirstOrDefault(s => s.Id == session.User.Id).Id;
+        }
+
+        public void RegisterUser(User user)
+        {
+            throw new NotImplementedException();
         }
 
         public bool IsEmailUsed(string email)
