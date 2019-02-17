@@ -30,6 +30,10 @@
     <Compile Remove="Migrations\20190216193635_test.Designer.cs" />
     <Compile Remove="Migrations\20190216201627_Sessions2.cs" />
     <Compile Remove="Migrations\20190216201627_Sessions2.Designer.cs" />
+    <Compile Remove="Migrations\20190217111247_test.cs" />
+    <Compile Remove="Migrations\20190217111247_test.Designer.cs" />
+    <Compile Remove="Migrations\20190217111452_test.cs" />
+    <Compile Remove="Migrations\20190217111452_test.Designer.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Remove="App.config" />

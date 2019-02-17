@@ -8,9 +8,9 @@ namespace BonsaiServer.Database
     [Serializable]
     public class Plant
     {
-        public int Id { get; set; }
-        public User User { get; set; }
-        [StringLength(20)] public string Name { get; set; }
+        [Column(Order = 0)]public int Id { get; set; }
+        [Column(Order = 1)]public User User { get; set; }
+        [Column(Order = 2)] [StringLength(20)] public string Name { get; set; }
         public byte LeavesId { get; set; }
         public byte FlowersId { get; set; }
         [StringLength(3)] public string LeavesColor { get; set; }
