@@ -1,0 +1,83 @@
+﻿@model IEnumerable<BonsaiServer.Database.Plant>
+
+<p>
+    <a asp-action="Create">Create New</a>
+</p>
+<table class="table">
+    <thead>
+        <tr>
+            <th>
+                @Html.DisplayNameFor(model => model.Name)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeavesId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlowersId)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.LeavesColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.FlowerColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.DirtColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.PotColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.SoilColor)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Rarity)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Slot)
+            </th>
+            <th></th>
+        </tr>
+    </thead>
+    <tbody>
+@foreach (var item in Model) {
+        <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Name)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeavesId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlowersId)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.LeavesColor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.FlowerColor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.DirtColor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.PotColor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.SoilColor)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Rarity)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Slot)
+            </td>
+            <td>
+                <a asp-action="Edit" asp-route-id="@item.Id">Edit</a> |
+                <a asp-action="Details" asp-route-id="@item.Id">Details</a> |
+                <a asp-action="Delete" asp-route-id="@item.Id">Delete</a>
+            </td>
+        </tr>
+}
+    </tbody>
+</table>

@@ -3,7 +3,8 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Layout</title>
+    <title>Manage @this.ViewContext.RouteData.Values["controller"].ToString()</title>
+    <link rel="stylesheet" type="text/css" href="~/css/theme.css">
 </head>
 <body>
     <div>
@@ -11,3 +12,8 @@
     </div>
 </body>
 </html>
+
+@section Scripts {
+    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
+}
+

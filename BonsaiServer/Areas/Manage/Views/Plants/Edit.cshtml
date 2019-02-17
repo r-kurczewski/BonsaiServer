@@ -1,0 +1,69 @@
+﻿@model BonsaiServer.Database.Plant
+
+<h4>Plant</h4>
+<hr />
+<div class="row">
+    <div class="col-md-4">
+        <form asp-action="Edit">
+            <div asp-validation-summary="ModelOnly" class="text-danger"></div>
+            <input type="hidden" asp-for="Id" />
+            <div class="form-group">
+                <label asp-for="Name" class="control-label"></label>
+                <input asp-for="Name" class="form-control" />
+                <span asp-validation-for="Name" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LeavesId" class="control-label"></label>
+                <input asp-for="LeavesId" class="form-control" />
+                <span asp-validation-for="LeavesId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FlowersId" class="control-label"></label>
+                <input asp-for="FlowersId" class="form-control" />
+                <span asp-validation-for="FlowersId" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="LeavesColor" class="control-label"></label>
+                <input asp-for="LeavesColor" class="form-control" />
+                <span asp-validation-for="LeavesColor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="FlowerColor" class="control-label"></label>
+                <input asp-for="FlowerColor" class="form-control" />
+                <span asp-validation-for="FlowerColor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="DirtColor" class="control-label"></label>
+                <input asp-for="DirtColor" class="form-control" />
+                <span asp-validation-for="DirtColor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="PotColor" class="control-label"></label>
+                <input asp-for="PotColor" class="form-control" />
+                <span asp-validation-for="PotColor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="SoilColor" class="control-label"></label>
+                <input asp-for="SoilColor" class="form-control" />
+                <span asp-validation-for="SoilColor" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Rarity" class="control-label"></label>
+                <select asp-for="Rarity" class="form-control"></select>
+                <span asp-validation-for="Rarity" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <label asp-for="Slot" class="control-label"></label>
+                <input asp-for="Slot" class="form-control" />
+                <span asp-validation-for="Slot" class="text-danger"></span>
+            </div>
+            <div class="form-group">
+                <input type="submit" value="Save" class="btn btn-primary" />
+            </div>
+        </form>
+    </div>
+</div>
+
+<div>
+    <a asp-action="Index">Back to List</a>
+</div>

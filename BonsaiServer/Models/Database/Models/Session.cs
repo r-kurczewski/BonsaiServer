@@ -8,7 +8,7 @@ namespace BonsaiServer.Database
     public class Session
     {
         public int Id { get; set; }
-        public virtual User User { get; set; }
+        public User User { get; set; }
         [MaxLength(64)] public string SessionHash { get; set; }
     }
 }

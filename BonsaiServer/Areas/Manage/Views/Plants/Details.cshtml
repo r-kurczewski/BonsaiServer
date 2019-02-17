@@ -1,0 +1,72 @@
+﻿@model BonsaiServer.Database.Plant
+
+<div>
+    <h4>Plant</h4>
+    <hr />
+    <dl class="row">
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Name)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Name)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LeavesId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LeavesId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FlowersId)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FlowersId)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.LeavesColor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.LeavesColor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.FlowerColor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.FlowerColor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.DirtColor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.DirtColor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.PotColor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.PotColor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.SoilColor)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.SoilColor)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Rarity)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Rarity)
+        </dd>
+        <dt class = "col-sm-2">
+            @Html.DisplayNameFor(model => model.Slot)
+        </dt>
+        <dd class = "col-sm-10">
+            @Html.DisplayFor(model => model.Slot)
+        </dd>
+    </dl>
+</div>
+<div>
+    <a asp-action="Edit" asp-route-id="@Model.Id">Edit</a> |
+    <a asp-action="Index">Back to List</a>
+</div>

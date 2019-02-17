@@ -48,6 +48,7 @@ namespace BonsaiServer
             //{
             app.UseDeveloperExceptionPage();
             //}
+            app.UseStaticFiles();
             app.UseMvc(routes =>
             {
                 routes.MapRouteAnalyzer("/routes");

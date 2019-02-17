@@ -1,0 +1,17 @@
+﻿
+table{
+    table-layout: auto;
+    border: 1px solid black;
+    /*width: 100%;*/
+}
+
+table, th, td {
+    border: 1px solid black;
+    background-color: white;
+    text-align: center;
+}
+
+a:link, a:visited, a:hover, a:active{
+    color: blue;
+    text-decoration: none;
+}
