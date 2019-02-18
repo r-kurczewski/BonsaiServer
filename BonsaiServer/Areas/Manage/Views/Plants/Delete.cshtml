@@ -1,5 +1,11 @@
 ﻿@model BonsaiServer.Database.Plant
 
+@{
+    ViewData["Title"] = "Delete";
+}
+
+<h1>Delete</h1>
+
 <h3>Are you sure you want to delete this?</h3>
 <div>
     <h4>Plant</h4>
@@ -24,34 +30,34 @@
             @Html.DisplayFor(model => model.FlowersId)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.LeavesColor)
+            @Html.DisplayNameFor(model => model.LeavesColorString)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.LeavesColor)
+            @Html.DisplayFor(model => model.LeavesColorString)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.FlowerColor)
+            @Html.DisplayNameFor(model => model.FlowerColorString)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.FlowerColor)
+            @Html.DisplayFor(model => model.FlowerColorString)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.DirtColor)
+            @Html.DisplayNameFor(model => model.DirtColorString)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.DirtColor)
+            @Html.DisplayFor(model => model.DirtColorString)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.PotColor)
+            @Html.DisplayNameFor(model => model.PotColorString)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.PotColor)
+            @Html.DisplayFor(model => model.PotColorString)
         </dd>
         <dt class = "col-sm-2">
-            @Html.DisplayNameFor(model => model.SoilColor)
+            @Html.DisplayNameFor(model => model.SoilColorString)
         </dt>
         <dd class = "col-sm-10">
-            @Html.DisplayFor(model => model.SoilColor)
+            @Html.DisplayFor(model => model.SoilColorString)
         </dd>
         <dt class = "col-sm-2">
             @Html.DisplayNameFor(model => model.Rarity)

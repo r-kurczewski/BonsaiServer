@@ -9,6 +9,5 @@ namespace BonsaiServer.Database
         public DbSet<Plant> Plants { get; set; }
         public DbSet<User> Users { get; set; }
         public DbSet<Mutation> Mutations { get; set; }
-        public DbSet<Session> Sessions { get; set; }
     }
 }

@@ -16,6 +16,7 @@ namespace BonsaiServer.Migrations
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     Login = table.Column<string>(maxLength: 16, nullable: true),
                     PasswordHash = table.Column<string>(maxLength: 64, nullable: true),
+                    Session = table.Column<string>(maxLength: 64, nullable: true),
                     Email = table.Column<string>(maxLength: 32, nullable: true)
                 },
                 constraints: table =>
@@ -33,11 +34,11 @@ namespace BonsaiServer.Migrations
                     Name = table.Column<string>(maxLength: 20, nullable: true),
                     LeavesId = table.Column<byte>(nullable: false),
                     FlowersId = table.Column<byte>(nullable: false),
-                    LeavesColor = table.Column<string>(maxLength: 3, nullable: true),
-                    FlowerColor = table.Column<string>(maxLength: 3, nullable: true),
-                    DirtColor = table.Column<string>(maxLength: 3, nullable: true),
-                    PotColor = table.Column<string>(maxLength: 3, nullable: true),
-                    SoilColor = table.Column<string>(maxLength: 3, nullable: true),
+                    LeavesColorString = table.Column<string>(maxLength: 3, nullable: true),
+                    FlowerColorString = table.Column<string>(maxLength: 3, nullable: true),
+                    DirtColorString = table.Column<string>(maxLength: 3, nullable: true),
+                    PotColorString = table.Column<string>(maxLength: 3, nullable: true),
+                    SoilColorString = table.Column<string>(maxLength: 3, nullable: true),
                     Rarity = table.Column<byte>(nullable: false),
                     Slot = table.Column<byte>(nullable: false)
                 },
@@ -46,26 +47,6 @@ namespace BonsaiServer.Migrations
                     table.PrimaryKey("PK_Plants", x => x.Id);
                     table.ForeignKey(
                         name: "FK_Plants_Users_UserId",
-                        column: x => x.UserId,
-                        principalTable: "Users",
-                        principalColumn: "Id",
-                        onDelete: ReferentialAction.Restrict);
-                });
-
-            migrationBuilder.CreateTable(
-                name: "Sessions",
-                columns: table => new
-                {
-                    Id = table.Column<int>(nullable: false)
-                        .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(nullable: true),
-                    SessionHash = table.Column<string>(maxLength: 64, nullable: true)
-                },
-                constraints: table =>
-                {
-                    table.PrimaryKey("PK_Sessions", x => x.Id);
-                    table.ForeignKey(
-                        name: "FK_Sessions_Users_UserId",
                         column: x => x.UserId,
                         principalTable: "Users",
                         principalColumn: "Id",
@@ -126,20 +107,12 @@ namespace BonsaiServer.Migrations
                 name: "IX_Plants_UserId",
                 table: "Plants",
                 column: "UserId");
-
-            migrationBuilder.CreateIndex(
-                name: "IX_Sessions_UserId",
-                table: "Sessions",
-                column: "UserId");
         }
 
         protected override void Down(MigrationBuilder migrationBuilder)
         {
             migrationBuilder.DropTable(
                 name: "Mutations");
-
-            migrationBuilder.DropTable(
-                name: "Sessions");
 
             migrationBuilder.DropTable(
                 name: "Plants");

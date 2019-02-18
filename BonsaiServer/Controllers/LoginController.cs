@@ -9,9 +9,9 @@ namespace BonsaiServer.Controllers
 {
     public class LoginController : ControllerBase
     {
-        private readonly ISessionRepository repository;
+        private readonly IUserRepository repository;
 
-        public LoginController(ISessionRepository repository)
+        public LoginController(IUserRepository repository)
         {
             this.repository = repository;
         }
@@ -19,8 +19,8 @@ namespace BonsaiServer.Controllers
         [HttpPost]
         public IActionResult Index([FromBody]User cred)
         {
-            Session session = repository.GetSessionByCredentials(cred.Login, cred.PasswordHash);
-            if (!session.Equals(null)) return Ok(session);
+            User user = repository.GetUserByCredentials(cred.Login, cred.PasswordHash);
+            if (!user.Equals(null)) return Ok(user);
             else return StatusCode(400, "Login Error");
         }
     }

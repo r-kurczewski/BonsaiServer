@@ -26,11 +26,6 @@ namespace BonsaiServer.Database
             return context.Users.Find(id);
         }
 
-        public int GetUserBySession(Session session)
-        {
-            return context.Users.FirstOrDefault(s => s.Id == session.User.Id).Id;
-        }
-
         public void RegisterUser(User user)
         {
             throw new NotImplementedException();
@@ -44,6 +39,16 @@ namespace BonsaiServer.Database
         public bool IsLoginUsed(string login)
         {
             return !context.Users.FirstOrDefault(s => s.Login == login).Equals(null);
+        }
+
+        public User GetUserBySession(string session)
+        {
+            return context.Users.FirstOrDefault(s => s.Session == session);
+        }
+
+        public User GetUserByCredentials(string login, string passwordHash)
+        {
+            return context.Users.FirstOrDefault(s => s.Login == login && s.PasswordHash == passwordHash);
         }
     }
 }

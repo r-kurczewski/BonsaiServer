@@ -1,5 +1,11 @@
 ﻿@model IEnumerable<BonsaiServer.Database.Plant>
 
+@{
+    ViewData["Title"] = "Index";
+}
+
+<h1>Index</h1>
+
 <p>
     <a asp-action="Create">Create New</a>
 </p>
@@ -16,19 +22,19 @@
                 @Html.DisplayNameFor(model => model.FlowersId)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.LeavesColor)
+                @Html.DisplayNameFor(model => model.LeavesColorString)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FlowerColor)
+                @Html.DisplayNameFor(model => model.FlowerColorString)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.DirtColor)
+                @Html.DisplayNameFor(model => model.DirtColorString)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.PotColor)
+                @Html.DisplayNameFor(model => model.PotColorString)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.SoilColor)
+                @Html.DisplayNameFor(model => model.SoilColorString)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.Rarity)
@@ -52,19 +58,19 @@
                 @Html.DisplayFor(modelItem => item.FlowersId)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.LeavesColor)
+                @Html.DisplayFor(modelItem => item.LeavesColorString)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FlowerColor)
+                @Html.DisplayFor(modelItem => item.FlowerColorString)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.DirtColor)
+                @Html.DisplayFor(modelItem => item.DirtColorString)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.PotColor)
+                @Html.DisplayFor(modelItem => item.PotColorString)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.SoilColor)
+                @Html.DisplayFor(modelItem => item.SoilColorString)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Rarity)

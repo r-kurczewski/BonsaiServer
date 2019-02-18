@@ -13,7 +13,7 @@ namespace BonsaiServer.Controllers
             this.repository = repository;
         }
         [HttpPost]
-        public IActionResult Get([FromBody] Session session)
+        public IActionResult Get([FromBody] string session)
         {
             List<Plant> plants = repository.GetPlantsOfUser(session).ToList();
             if(plants.Count == 0)

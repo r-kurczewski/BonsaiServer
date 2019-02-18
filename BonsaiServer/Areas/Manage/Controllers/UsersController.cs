@@ -54,7 +54,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Login,PasswordHash,Email")] User user)
+        public async Task<IActionResult> Create([Bind("Id,Login,PasswordHash,Session,Email")] User user)
         {
             if (ModelState.IsValid)
             {
@@ -86,7 +86,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Login,PasswordHash,Email")] User user)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,Login,PasswordHash,Session,Email")] User user)
         {
             if (id != user.Id)
             {

@@ -5,12 +5,12 @@ namespace BonsaiServer.Models
     [Serializable]
     public class AuthData<T>
     {
-        public User cred;
+        public string session;
         public T data;
 
-        public AuthData(User cred, T data)
+        public AuthData(string session, T data)
         {
-            this.cred = cred;
+            this.session = session;
             this.data = data;
         }
     }

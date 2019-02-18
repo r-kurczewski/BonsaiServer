@@ -25,20 +25,20 @@ namespace BonsaiServer.Controllers
 
         public ActionResult Add()
         {
-            Plant plant = new Plant()
-            {
-                Name = DateTime.Now.ToString(),
-                FlowersId = 1,
-                LeavesId = 1,
-                LeavesColor = BColor.RandomColor(),
-                FlowerColor = BColor.RandomColor(),
-                DirtColor = BColor.RandomColor(),
-                SoilColor = BColor.RandomColor(),
-                PotColor = BColor.RandomColor(),
-                Rarity = Rarity.Tier.Premium,
-                Slot = 0,
-            };
-            plantsRepository.AddPlant(plant);
+            //Plant plant = new Plant()
+            //{
+            //    Name = DateTime.Now.ToString(),
+            //    FlowersId = 1,
+            //    LeavesId = 1,
+            //    LeavesColor = BColor.RandomColor(),
+            //    FlowerColor = BColor.RandomColor(),
+            //    DirtColor = BColor.RandomColor(),
+            //    SoilColor = BColor.RandomColor(),
+            //    PotColor = BColor.RandomColor(),
+            //    Rarity = Rarity.Tier.Premium,
+            //    Slot = 0,
+            //};
+            //plantsRepository.AddPlant(plant);
 
             return Ok("Added plant");
         }

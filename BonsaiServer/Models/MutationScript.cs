@@ -12,21 +12,21 @@ namespace BonsaiServer.Models
         public static List<string> mutableFields = new List<string>()
         { "leaves_id", "leaves_color", "flower_id", "flower_color", "stalk_color", "dirt_color" };
 
-        public static Plant Cross(List<Plant> plants)
-        {
-            Plant newPlant = new Plant();
-            Random rnd = new Random();
-            foreach (var fieldName in mutableFields)
-            {
-                FieldInfo field = newPlant.GetType().GetField(fieldName);
-                field.SetValue(newPlant, field.GetValue(plants[rnd.Next(0,2)]));
-            }
-            newPlant.Slot = 0;
-            newPlant.Name = GenerateName(newPlant);
-            newPlant.PotColor = "f95";
-            newPlant.Rarity = GetRarity(newPlant);
-            return newPlant;
-        }
+        //public static Plant Cross(List<Plant> plants)
+        //{
+        //    Plant newPlant = new Plant();
+        //    Random rnd = new Random();
+        //    foreach (var fieldName in mutableFields)
+        //    {
+        //        FieldInfo field = newPlant.GetType().GetField(fieldName);
+        //        field.SetValue(newPlant, field.GetValue(plants[rnd.Next(0,2)]));
+        //    }
+        //    newPlant.Slot = 0;
+        //    newPlant.Name = GenerateName(newPlant);
+        //    newPlant.PotColor = "f95";
+        //    newPlant.Rarity = GetRarity(newPlant);
+        //    return newPlant;
+        //}
 
         static string GenerateName(Plant plant)
         {

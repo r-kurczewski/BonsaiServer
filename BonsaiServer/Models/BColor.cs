@@ -56,18 +56,48 @@ namespace BonsaiServer.Models
             return new int[] {r,g,b};
         }
 
+        public static Color FromString(string hex)
+        {
+            try
+            {
+                if (!ValidColor(hex)) throw new Exception("Wrong Color.");
+                char f = 'f';
+                int r = int.Parse(string.Concat(hex[0], f), System.Globalization.NumberStyles.HexNumber);
+                int g = int.Parse(string.Concat(hex[1], f), System.Globalization.NumberStyles.HexNumber);
+                int b = int.Parse(string.Concat(hex[2], f), System.Globalization.NumberStyles.HexNumber);
+                return Color.FromArgb(r, g, b);
+            }
+            catch
+            {
+                return Color.FromArgb(255,255,255);
+            }
+        }
+
+        public static string ToString(Color color)
+        {
+            var r = Convert.ToInt32(color.R * 255).ToString("x")[0];
+            var g = Convert.ToInt32(color.G * 255).ToString("x")[0];
+            var b = Convert.ToInt32(color.B * 255).ToString("x")[0];
+            var builder = new StringBuilder();
+            builder
+                .Append(r)
+                .Append(g)
+                .Append(b);
+            return builder.ToString();
+        }
+
         public static bool ValidColor(string hex)
         {
             if (hex == null || hex.Length != 3) return false;
             hex = hex.ToLower();
-            foreach(char ch in hex)
+            foreach (char ch in hex)
             {
                 if (!chars.Contains(ch)) return false;
             }
             return true;
         }
 
-        public static string RandomColor()
+        public static Color RandomColor()
         {
             var rand = new Random();
             string color = "";
@@ -75,7 +105,7 @@ namespace BonsaiServer.Models
             {
                 color += chars[rand.Next(0, chars.Length)];
             }
-            return color;
+            return FromString(color);
         }
     }
 }

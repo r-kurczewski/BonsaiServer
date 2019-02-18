@@ -11,12 +11,14 @@ namespace BonsaiServer.Database
 
         User GetOwnerOfPlant(Plant plant);
 
-        int GetUserBySession(Session session);
+        User GetUserBySession(string session);
 
         void RegisterUser(User user);
 
         bool IsLoginUsed(string login);
 
         bool IsEmailUsed(string email);
+
+        User GetUserByCredentials(string login, string passwordHash);
     }
 }

@@ -6,36 +6,6 @@
     <PublishWithAspNetCoreTargetManifest>false</PublishWithAspNetCoreTargetManifest>
   </PropertyGroup>
   <ItemGroup>
-    <Compile Remove="Migrations\20190215200047_Users.cs" />
-    <Compile Remove="Migrations\20190215200047_Users.Designer.cs" />
-    <Compile Remove="Migrations\20190216182454_Session.cs" />
-    <Compile Remove="Migrations\20190216182454_Session.Designer.cs" />
-    <Compile Remove="Migrations\20190216183808_Session2.cs" />
-    <Compile Remove="Migrations\20190216183808_Session2.Designer.cs" />
-    <Compile Remove="Migrations\20190216184146_Sessions.cs" />
-    <Compile Remove="Migrations\20190216184146_Sessions.Designer.cs" />
-    <Compile Remove="Migrations\20190216184626_Sessions2.cs" />
-    <Compile Remove="Migrations\20190216184626_Sessions2.Designer.cs" />
-    <Compile Remove="Migrations\20190216185147_Sessions.cs" />
-    <Compile Remove="Migrations\20190216185147_Sessions.Designer.cs" />
-    <Compile Remove="Migrations\20190216192538_test.cs" />
-    <Compile Remove="Migrations\20190216192538_test.Designer.cs" />
-    <Compile Remove="Migrations\20190216192734_test.cs" />
-    <Compile Remove="Migrations\20190216192734_test.Designer.cs" />
-    <Compile Remove="Migrations\20190216193039_test.cs" />
-    <Compile Remove="Migrations\20190216193039_test.Designer.cs" />
-    <Compile Remove="Migrations\20190216193221_test.cs" />
-    <Compile Remove="Migrations\20190216193221_test.Designer.cs" />
-    <Compile Remove="Migrations\20190216193635_test.cs" />
-    <Compile Remove="Migrations\20190216193635_test.Designer.cs" />
-    <Compile Remove="Migrations\20190216201627_Sessions2.cs" />
-    <Compile Remove="Migrations\20190216201627_Sessions2.Designer.cs" />
-    <Compile Remove="Migrations\20190217111247_test.cs" />
-    <Compile Remove="Migrations\20190217111247_test.Designer.cs" />
-    <Compile Remove="Migrations\20190217111452_test.cs" />
-    <Compile Remove="Migrations\20190217111452_test.Designer.cs" />
-  </ItemGroup>
-  <ItemGroup>
     <Content Remove="App.config" />
   </ItemGroup>
   <ItemGroup>
@@ -43,6 +13,7 @@
     <Folder Include="Areas\Manage\Models\" />
     <Folder Include="Areas\Shop\Data\" />
     <Folder Include="Areas\Shop\Models\" />
+    <Folder Include="Areas\Shop\Views\" />
   </ItemGroup>
   <ItemGroup>
     <PackageReference Include="AspNetCore.RouteAnalyzer" Version="0.5.3" />

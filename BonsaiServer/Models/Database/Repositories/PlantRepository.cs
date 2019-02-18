@@ -28,10 +28,9 @@ namespace BonsaiServer.Database
             return context.Plants;
         }
 
-        public IEnumerable<Plant> GetPlantsOfUser(Session session)
+        public IEnumerable<Plant> GetPlantsOfUser(string session)
         {
-            session = context.Sessions.FirstOrDefault(s => s.SessionHash == session.SessionHash);
-            return context.Plants.Where(plant => plant.User == session.User);
+            return context.Plants.Where(plant => plant.User.Session == session);
         }
 
         public void RemoveLastPlant()

@@ -52,15 +52,15 @@ namespace BonsaiServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("DirtColor")
+                    b.Property<string>("DirtColorString")
                         .HasMaxLength(3);
 
-                    b.Property<string>("FlowerColor")
+                    b.Property<string>("FlowerColorString")
                         .HasMaxLength(3);
 
                     b.Property<byte>("FlowersId");
 
-                    b.Property<string>("LeavesColor")
+                    b.Property<string>("LeavesColorString")
                         .HasMaxLength(3);
 
                     b.Property<byte>("LeavesId");
@@ -68,14 +68,14 @@ namespace BonsaiServer.Migrations
                     b.Property<string>("Name")
                         .HasMaxLength(20);
 
-                    b.Property<string>("PotColor")
+                    b.Property<string>("PotColorString")
                         .HasMaxLength(3);
 
                     b.Property<byte>("Rarity");
 
                     b.Property<byte>("Slot");
 
-                    b.Property<string>("SoilColor")
+                    b.Property<string>("SoilColorString")
                         .HasMaxLength(3);
 
                     b.Property<int?>("UserId");
@@ -85,24 +85,6 @@ namespace BonsaiServer.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("Plants");
-                });
-
-            modelBuilder.Entity("BonsaiServer.Database.Session", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
-
-                    b.Property<string>("SessionHash")
-                        .HasMaxLength(64);
-
-                    b.Property<int?>("UserId");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("UserId");
-
-                    b.ToTable("Sessions");
                 });
 
             modelBuilder.Entity("BonsaiServer.Database.User", b =>
@@ -118,6 +100,9 @@ namespace BonsaiServer.Migrations
                         .HasMaxLength(16);
 
                     b.Property<string>("PasswordHash")
+                        .HasMaxLength(64);
+
+                    b.Property<string>("Session")
                         .HasMaxLength(64);
 
                     b.HasKey("Id");
@@ -143,14 +128,7 @@ namespace BonsaiServer.Migrations
             modelBuilder.Entity("BonsaiServer.Database.Plant", b =>
                 {
                     b.HasOne("BonsaiServer.Database.User", "User")
-                        .WithMany()
-                        .HasForeignKey("UserId");
-                });
-
-            modelBuilder.Entity("BonsaiServer.Database.Session", b =>
-                {
-                    b.HasOne("BonsaiServer.Database.User", "User")
-                        .WithMany()
+                        .WithMany("Plants")
                         .HasForeignKey("UserId");
                 });
 #pragma warning restore 612, 618
