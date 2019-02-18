@@ -15,3 +15,13 @@ a:link, a:visited, a:hover, a:active{
     color: blue;
     text-decoration: none;
 }
+
+navbar{
+    background-color: cornflowerblue;
+}
+
+li{
+    margin:0;
+    padding:0;
+    display:inline;
+}

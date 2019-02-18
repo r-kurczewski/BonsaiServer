@@ -21,7 +21,7 @@ namespace BonsaiServer.Controllers
         {
             Session session = repository.GetSessionByCredentials(cred.Login, cred.PasswordHash);
             if (!session.Equals(null)) return Ok(session);
-            else return StatusCode(400, "Login Error"); ;
+            else return StatusCode(400, "Login Error");
         }
     }
 }
