@@ -13,6 +13,12 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Id)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.User)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Name)
             </th>
             <th>
@@ -25,10 +31,7 @@
                 @Html.DisplayNameFor(model => model.LeavesColorString)
             </th>
             <th>
-                @Html.DisplayNameFor(model => model.FlowerColorString)
-            </th>
-            <th>
-                @Html.DisplayNameFor(model => model.DirtColorString)
+                @Html.DisplayNameFor(model => model.FlowersColorString)
             </th>
             <th>
                 @Html.DisplayNameFor(model => model.PotColorString)
@@ -49,6 +52,12 @@
 @foreach (var item in Model) {
         <tr>
             <td>
+                @Html.DisplayFor(modelItem => item.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.User.Id)
+            </td>
+            <td>
                 @Html.DisplayFor(modelItem => item.Name)
             </td>
             <td>
@@ -61,10 +70,7 @@
                 @Html.DisplayFor(modelItem => item.LeavesColorString)
             </td>
             <td>
-                @Html.DisplayFor(modelItem => item.FlowerColorString)
-            </td>
-            <td>
-                @Html.DisplayFor(modelItem => item.DirtColorString)
+                @Html.DisplayFor(modelItem => item.FlowersColorString)
             </td>
             <td>
                 @Html.DisplayFor(modelItem => item.PotColorString)

@@ -22,7 +22,8 @@ namespace BonsaiServer.Areas.Manage.Controllers
         // GET: Manage/Plants
         public async Task<IActionResult> Index()
         {
-            return View(await _context.Plants.ToListAsync());
+            var appDbContext = _context.Plants.Include(p => p.User);
+            return View(await appDbContext.ToListAsync());
         }
 
         // GET: Manage/Plants/Details/5
@@ -34,6 +35,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
             }
 
             var plant = await _context.Plants
+                .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (plant == null)
             {
@@ -46,6 +48,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
         // GET: Manage/Plants/Create
         public IActionResult Create()
         {
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -54,7 +57,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Name,LeavesId,FlowersId,LeavesColorString,FlowerColorString,DirtColorString,PotColorString,SoilColorString,Rarity,Slot")] Plant plant)
+        public async Task<IActionResult> Create([Bind("Id,UserId,Name,LeavesId,FlowersId,LeavesColorString,FlowersColorString,PotColorString,SoilColorString,Rarity,Slot")] Plant plant)
         {
             if (ModelState.IsValid)
             {
@@ -62,6 +65,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
                 await _context.SaveChangesAsync();
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", plant.UserId);
             return View(plant);
         }
 
@@ -78,6 +82,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
             {
                 return NotFound();
             }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", plant.UserId);
             return View(plant);
         }
 
@@ -86,7 +91,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Name,LeavesId,FlowersId,LeavesColorString,FlowerColorString,DirtColorString,PotColorString,SoilColorString,Rarity,Slot")] Plant plant)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Name,LeavesId,FlowersId,LeavesColorString,FlowersColorString,PotColorString,SoilColorString,Rarity,Slot")] Plant plant)
         {
             if (id != plant.Id)
             {
@@ -113,6 +118,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
                 }
                 return RedirectToAction(nameof(Index));
             }
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", plant.UserId);
             return View(plant);
         }
 
@@ -125,6 +131,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
             }
 
             var plant = await _context.Plants
+                .Include(p => p.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (plant == null)
             {

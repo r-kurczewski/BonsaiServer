@@ -13,7 +13,7 @@ namespace BonsaiServer.Database
 
         User GetUserBySession(string session);
 
-        void RegisterUser(User user);
+        void CreateUser(User user);
 
         bool IsLoginUsed(string login);
 

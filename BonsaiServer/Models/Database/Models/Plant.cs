@@ -9,24 +9,61 @@ namespace BonsaiServer.Database
     [Serializable]
     public class Plant
     {
+        #region database model
         public int Id { get; set; }
-        [ForeignKey("UserId")] public User User { get; set; }
-        [StringLength(20)] public string Name { get; set; }
+        public int UserId { get; set; }
+
+        [ForeignKey("UserId")][Display(Name ="UserId")]
+        public User User { get; set; }
+
+        [StringLength(20)]
+        public string Name { get; set; }
+
         public byte LeavesId { get; set; }
         public byte FlowersId { get; set; }
-        [StringLength(3)] public string LeavesColorString { get; set; }
-        [StringLength(3)] public string FlowerColorString { get; set; }
-        [StringLength(3)] public string DirtColorString { get; set; }
-        [StringLength(3)] public string PotColorString { get; set; }
-        [StringLength(3)] public string SoilColorString { get; set; }
+
+        [StringLength(3)][Column("LeavesColor")][Display(Name = "LeavesColor")]
+        public string LeavesColorString { get; set; }
+
+        [StringLength(3)][Column("FlowersColor")][Display(Name = "FlowersColor")]
+        public string FlowersColorString { get; set; }
+
+        [StringLength(3)][Column("PotColor")][Display(Name = "PotColor")]
+        public string PotColorString { get; set; }
+
+        [StringLength(3)][Column("SoilColor")][Display(Name = "SoilColor")]
+        public string SoilColorString { get; set; }
+
         public Rarity.Tier Rarity { get; set; }
         public byte Slot { get; set; }
+        #endregion
 
         [NotMapped]
         public Color LeavesColor
         {
             get { return BColor.FromString(LeavesColorString); }
             set { LeavesColorString = BColor.ToString(value); }
+        }
+
+        [NotMapped]
+        public Color FlowersColor
+        {
+            get { return BColor.FromString(FlowersColorString); }
+            set { FlowersColorString = BColor.ToString(value); }
+        }
+
+        [NotMapped]
+        public Color PotColor
+        {
+            get { return BColor.FromString(PotColorString); }
+            set { PotColorString = BColor.ToString(value); }
+        }
+
+        [NotMapped]
+        public Color SoilColor
+        {
+            get { return BColor.FromString(SoilColorString); }
+            set { SoilColorString = BColor.ToString(value); }
         }
     }
 }

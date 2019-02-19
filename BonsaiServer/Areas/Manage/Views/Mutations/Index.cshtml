@@ -13,6 +13,12 @@
     <thead>
         <tr>
             <th>
+                @Html.DisplayNameFor(model => model.Plant1)
+            </th>
+            <th>
+                @Html.DisplayNameFor(model => model.Plant2)
+            </th>
+            <th>
                 @Html.DisplayNameFor(model => model.Start)
             </th>
             <th>
@@ -24,6 +30,12 @@
     <tbody>
 @foreach (var item in Model) {
         <tr>
+            <td>
+                @Html.DisplayFor(modelItem => item.Plant1.Id)
+            </td>
+            <td>
+                @Html.DisplayFor(modelItem => item.Plant2.Id)
+            </td>
             <td>
                 @Html.DisplayFor(modelItem => item.Start)
             </td>

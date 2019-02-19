@@ -27,9 +27,9 @@ namespace BonsaiServer.Migrations
 
                     b.Property<DateTime>("End");
 
-                    b.Property<int?>("Plant1Id");
+                    b.Property<int>("Plant1Id");
 
-                    b.Property<int?>("Plant2Id");
+                    b.Property<int>("Plant2Id");
 
                     b.Property<DateTime>("Start");
 
@@ -52,15 +52,14 @@ namespace BonsaiServer.Migrations
                         .ValueGeneratedOnAdd()
                         .HasAnnotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn);
 
-                    b.Property<string>("DirtColorString")
-                        .HasMaxLength(3);
-
-                    b.Property<string>("FlowerColorString")
+                    b.Property<string>("FlowersColorString")
+                        .HasColumnName("FlowersColor")
                         .HasMaxLength(3);
 
                     b.Property<byte>("FlowersId");
 
                     b.Property<string>("LeavesColorString")
+                        .HasColumnName("LeavesColor")
                         .HasMaxLength(3);
 
                     b.Property<byte>("LeavesId");
@@ -69,6 +68,7 @@ namespace BonsaiServer.Migrations
                         .HasMaxLength(20);
 
                     b.Property<string>("PotColorString")
+                        .HasColumnName("PotColor")
                         .HasMaxLength(3);
 
                     b.Property<byte>("Rarity");
@@ -76,9 +76,10 @@ namespace BonsaiServer.Migrations
                     b.Property<byte>("Slot");
 
                     b.Property<string>("SoilColorString")
+                        .HasColumnName("SoilColor")
                         .HasMaxLength(3);
 
-                    b.Property<int?>("UserId");
+                    b.Property<int>("UserId");
 
                     b.HasKey("Id");
 
@@ -114,22 +115,26 @@ namespace BonsaiServer.Migrations
                 {
                     b.HasOne("BonsaiServer.Database.Plant", "Plant1")
                         .WithMany()
-                        .HasForeignKey("Plant1Id");
+                        .HasForeignKey("Plant1Id")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("BonsaiServer.Database.Plant", "Plant2")
                         .WithMany()
-                        .HasForeignKey("Plant2Id");
+                        .HasForeignKey("Plant2Id")
+                        .OnDelete(DeleteBehavior.Restrict);
 
                     b.HasOne("BonsaiServer.Database.User", "User")
                         .WithMany()
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 
             modelBuilder.Entity("BonsaiServer.Database.Plant", b =>
                 {
                     b.HasOne("BonsaiServer.Database.User", "User")
                         .WithMany("Plants")
-                        .HasForeignKey("UserId");
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Restrict);
                 });
 #pragma warning restore 612, 618
         }

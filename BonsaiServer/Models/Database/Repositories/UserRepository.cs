@@ -20,15 +20,15 @@ namespace BonsaiServer.Database
             return context.Users.Find(plant.User);
         }
 
-
         public User GetUserById(int id)
         {
             return context.Users.Find(id);
         }
 
-        public void RegisterUser(User user)
+        public void CreateUser(User user)
         {
-            throw new NotImplementedException();
+            context.Users.Add(user);
+            context.SaveChanges();
         }
 
         public bool IsEmailUsed(string email)

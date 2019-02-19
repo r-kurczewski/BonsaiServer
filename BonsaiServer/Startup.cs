@@ -29,12 +29,13 @@ namespace BonsaiServer
         public void ConfigureServices(IServiceCollection services)
         {
             services.AddMvc()
-             .AddJsonOptions(options => {
+             .AddJsonOptions(options =>
+             {
                  options.SerializerSettings.NullValueHandling = NullValueHandling.Ignore;
              });
             services.Configure<Models.AppSettings>(Configuration.GetSection("Settings"));
             services.AddDbContext<AppDbContext>(options => options.UseSqlServer(Configuration.GetConnectionString("DefaultConnection")));
-            services.AddTransient<IPlantRepository,PlantRepository>();
+            services.AddTransient<IPlantRepository, PlantRepository>();
             services.AddTransient<IUserRepository, UserRepository>();
             services.AddTransient<IMutationRepository, MutationRepository>();
             services.AddRouteAnalyzer();
@@ -58,9 +59,9 @@ namespace BonsaiServer
                  template: "{area:exists}/{controller=Home}/{action=Index}/{id?}"
                );
 
-            routes.MapRoute(
-             name: "default",
-             template: "{controller=Home}/{action=Index}/{id?}");
+                routes.MapRoute(
+                 name: "default",
+                 template: "{controller=Home}/{action=Index}/{id?}");
             });
         }
     }

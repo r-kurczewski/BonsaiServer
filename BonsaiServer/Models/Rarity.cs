@@ -1,4 +1,5 @@
 ﻿using BonsaiServer.Database;
+using System.ComponentModel.DataAnnotations;
 
 namespace BonsaiServer.Models
 {
@@ -9,7 +10,7 @@ namespace BonsaiServer.Models
             Common,
             Uncommon,
             Rare,
-            Very_Rare,
+            [Display(Name = "Very Rare")] Very_Rare,
             Unique,
             Premium
         }

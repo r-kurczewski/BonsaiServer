@@ -30,15 +30,14 @@ namespace BonsaiServer.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(nullable: true),
+                    UserId = table.Column<int>(nullable: false),
                     Name = table.Column<string>(maxLength: 20, nullable: true),
                     LeavesId = table.Column<byte>(nullable: false),
                     FlowersId = table.Column<byte>(nullable: false),
-                    LeavesColorString = table.Column<string>(maxLength: 3, nullable: true),
-                    FlowerColorString = table.Column<string>(maxLength: 3, nullable: true),
-                    DirtColorString = table.Column<string>(maxLength: 3, nullable: true),
-                    PotColorString = table.Column<string>(maxLength: 3, nullable: true),
-                    SoilColorString = table.Column<string>(maxLength: 3, nullable: true),
+                    LeavesColor = table.Column<string>(maxLength: 3, nullable: true),
+                    FlowersColor = table.Column<string>(maxLength: 3, nullable: true),
+                    PotColor = table.Column<string>(maxLength: 3, nullable: true),
+                    SoilColor = table.Column<string>(maxLength: 3, nullable: true),
                     Rarity = table.Column<byte>(nullable: false),
                     Slot = table.Column<byte>(nullable: false)
                 },
@@ -60,8 +59,8 @@ namespace BonsaiServer.Migrations
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
                     UserId = table.Column<int>(nullable: true),
-                    Plant1Id = table.Column<int>(nullable: true),
-                    Plant2Id = table.Column<int>(nullable: true),
+                    Plant1Id = table.Column<int>(nullable: false),
+                    Plant2Id = table.Column<int>(nullable: false),
                     Start = table.Column<DateTime>(nullable: false),
                     End = table.Column<DateTime>(nullable: false)
                 },

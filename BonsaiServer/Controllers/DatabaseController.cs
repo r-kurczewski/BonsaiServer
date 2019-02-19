@@ -1,4 +1,5 @@
 ﻿using Microsoft.AspNetCore.Mvc;
+using System.Collections.Generic;
 
 namespace BonsaiServer.Controllers
 {
@@ -9,30 +10,7 @@ namespace BonsaiServer.Controllers
         [HttpGet]
         public IActionResult TableNames()
         {
-            return Ok();
-            //var conn = new MySqlConnection(_appSettings.DefaultConnection);
-            //try
-            //{
-            //    conn.Open();
-            //    var result = new List<string>{"Available tables:"};
-            //    var sql = "show tables";
-            //    var cmd = new MySqlCommand(sql, conn);
-            //    var rdr = cmd.ExecuteReader();
-            //    while (rdr.Read())
-            //    {
-            //        result.Add(rdr.GetString(0));
-            //    }
-            //    rdr.Close();
-            //    return Content(string.Join("\n", result));
-            //}
-            //catch (Exception ex)
-            //{
-            //    return Content(ex.Message);
-            //}
-            //finally
-            //{
-            //    conn.Close();
-            //}
+            return Ok(new List<string>() {"", "" });
         }
 
         [HttpGet("{table}")]

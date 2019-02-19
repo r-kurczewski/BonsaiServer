@@ -4,24 +4,25 @@
 <head>
     <meta name="viewport" content="width=device-width" />
     <title>Manage @this.ViewContext.RouteData.Values["controller"].ToString()</title>
+    <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css">
+    <script src="https://code.jquery.com/jquery-3.3.1.slim.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.14.7/umd/popper.min.js"></script>
     <link rel="stylesheet" type="text/css" href="~/css/theme.css">
 </head>
 <body>
-    <div>
-        <navbar>
-            <ul>
-                <li><a asp-controller="Plants">Plants</a></li>
-                <li><a asp-controller="Users">Users</a></li>
-                <li><a asp-controller="Mutations">Mutations</a></li>
-                @*<li><a asp-controller="Sessions">Sessions</a></li>*@
-            </ul>
-        </navbar>
-        @RenderBody()
-    </div>
+    @{
+        var links = new List<string>() { "Plants", "Users", "Mutations" };
+    }
+    <navbar>
+        <table><thead>
+                <tr>
+                    @foreach (var link in links)
+                    {
+                        <th><a asp-controller="@link" asp-action="Index">@link</a></th>
+                    }
+                </tr>
+            </thead></table>
+    </navbar>
+    @RenderBody()
 </body>
 </html>
-
-@section Scripts {
-    @{await Html.RenderPartialAsync("_ValidationScriptsPartial");}
-}
-

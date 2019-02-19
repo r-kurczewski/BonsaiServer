@@ -24,7 +24,7 @@ namespace BonsaiServer.Controllers
             if (repository.IsEmailUsed(user.Email)) return StatusCode(409, "Email is unavailable.");
             try
             {
-                repository.RegisterUser(user);
+                repository.CreateUser(user);
                 return Ok($"Account {user.Login} successfully created.");
             }
             catch (Exception ex)
