@@ -22,7 +22,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
         // GET: Manage/Mutations
         public async Task<IActionResult> Index()
         {
-            var appDbContext = _context.Mutations.Include(m => m.Plant1).Include(m => m.Plant2);
+            var appDbContext = _context.Mutations.Include(m => m.Plant1).Include(m => m.Plant2).Include(m => m.User);
             return View(await appDbContext.ToListAsync());
         }
 
@@ -37,6 +37,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
             var mutation = await _context.Mutations
                 .Include(m => m.Plant1)
                 .Include(m => m.Plant2)
+                .Include(m => m.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (mutation == null)
             {
@@ -51,6 +52,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
         {
             ViewData["Plant1Id"] = new SelectList(_context.Plants, "Id", "Id");
             ViewData["Plant2Id"] = new SelectList(_context.Plants, "Id", "Id");
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id");
             return View();
         }
 
@@ -59,7 +61,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,Plant1Id,Plant2Id,Start,End")] Mutation mutation)
+        public async Task<IActionResult> Create([Bind("Id,UserId,Plant1Id,Plant2Id,End")] Mutation mutation)
         {
             if (ModelState.IsValid)
             {
@@ -69,6 +71,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
             }
             ViewData["Plant1Id"] = new SelectList(_context.Plants, "Id", "Id", mutation.Plant1Id);
             ViewData["Plant2Id"] = new SelectList(_context.Plants, "Id", "Id", mutation.Plant2Id);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", mutation.UserId);
             return View(mutation);
         }
 
@@ -87,6 +90,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
             }
             ViewData["Plant1Id"] = new SelectList(_context.Plants, "Id", "Id", mutation.Plant1Id);
             ViewData["Plant2Id"] = new SelectList(_context.Plants, "Id", "Id", mutation.Plant2Id);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", mutation.UserId);
             return View(mutation);
         }
 
@@ -95,7 +99,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,Plant1Id,Plant2Id,Start,End")] Mutation mutation)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Plant1Id,Plant2Id,End")] Mutation mutation)
         {
             if (id != mutation.Id)
             {
@@ -124,6 +128,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
             }
             ViewData["Plant1Id"] = new SelectList(_context.Plants, "Id", "Id", mutation.Plant1Id);
             ViewData["Plant2Id"] = new SelectList(_context.Plants, "Id", "Id", mutation.Plant2Id);
+            ViewData["UserId"] = new SelectList(_context.Users, "Id", "Id", mutation.UserId);
             return View(mutation);
         }
 
@@ -138,6 +143,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
             var mutation = await _context.Mutations
                 .Include(m => m.Plant1)
                 .Include(m => m.Plant2)
+                .Include(m => m.User)
                 .FirstOrDefaultAsync(m => m.Id == id);
             if (mutation == null)
             {

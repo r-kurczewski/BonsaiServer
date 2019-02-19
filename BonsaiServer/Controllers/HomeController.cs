@@ -72,7 +72,6 @@ namespace BonsaiServer.Controllers
             {
                 Plant1Id = 1,
                 Plant2Id = 2,
-                Start = new DateTime(2018, 6, 6, 12, 12, 12),
                 End = new DateTime(2018, 6, 6, 13, 13, 13),
             };
             return Ok("Added start data to database");

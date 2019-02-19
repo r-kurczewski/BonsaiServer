@@ -10,7 +10,11 @@ namespace BonsaiServer.Database
     public class Mutation
     {
         public int Id { get; set; }
+        public int UserId { get; set; }
+
+        [ForeignKey("UserId")]
         public User User { get; set; }
+
         public int Plant1Id { get; set; }
         public int Plant2Id { get; set; }
 
@@ -20,7 +24,6 @@ namespace BonsaiServer.Database
         [ForeignKey("Plant2Id")]
         public Plant Plant2 { get; set; }
 
-        public DateTime Start { get; set; }
         public DateTime End { get; set; }
     }
 }
