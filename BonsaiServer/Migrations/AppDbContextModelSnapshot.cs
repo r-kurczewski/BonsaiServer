@@ -77,6 +77,10 @@ namespace BonsaiServer.Migrations
                         .HasColumnName("SoilColor")
                         .HasMaxLength(3);
 
+                    b.Property<string>("StalkColorString")
+                        .HasColumnName("StalkColor")
+                        .HasMaxLength(3);
+
                     b.Property<int>("UserId");
 
                     b.HasKey("Id");

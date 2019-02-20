@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using BonsaiServer.Database;
 using System.Linq;
+using System;
 
 namespace BonsaiServer.Controllers
 {
@@ -13,22 +14,26 @@ namespace BonsaiServer.Controllers
             this.repository = repository;
         }
         [HttpPost]
-        public IActionResult Get([FromBody] string session)
+        public IActionResult Get([FromBody] User user)
         {
-            List<Plant> plants = repository.GetPlantsOfUser(session).ToList();
-            if(plants.Count == 0)
+            List<Plant> plants;
+            try
             {
-
+                plants = repository.GetPlantsOfUser(user).ToList();
+                if (plants.Count == 0)
+                {
+                    return StatusCode(204, "No plants to get.");
+                }
+                else
+                {
+                    return Ok(plants);
+                }
             }
-            else if(plants.Count > 0)
+            catch(Exception ex)
             {
-
+                return StatusCode(500, ex.Message);
             }
-            else
-            {
-
-            }
-            return Ok();
+            
         }
 
         //[HttpPost]

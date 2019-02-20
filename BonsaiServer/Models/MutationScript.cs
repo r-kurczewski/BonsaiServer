@@ -28,7 +28,7 @@ namespace BonsaiServer.Models
         //    return newPlant;
         //}
 
-        static string GenerateName(Plant plant)
+        public static string GenerateName()
         {
             const string chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZ";
             int length = rand.Next(5, 12);

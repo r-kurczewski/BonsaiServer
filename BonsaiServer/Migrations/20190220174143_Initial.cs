@@ -34,6 +34,7 @@ namespace BonsaiServer.Migrations
                     Name = table.Column<string>(maxLength: 20, nullable: true),
                     LeavesId = table.Column<byte>(nullable: false),
                     FlowersId = table.Column<byte>(nullable: false),
+                    StalkColor = table.Column<string>(maxLength: 3, nullable: true),
                     LeavesColor = table.Column<string>(maxLength: 3, nullable: true),
                     FlowersColor = table.Column<string>(maxLength: 3, nullable: true),
                     PotColor = table.Column<string>(maxLength: 3, nullable: true),
@@ -58,10 +59,9 @@ namespace BonsaiServer.Migrations
                 {
                     Id = table.Column<int>(nullable: false)
                         .Annotation("SqlServer:ValueGenerationStrategy", SqlServerValueGenerationStrategy.IdentityColumn),
-                    UserId = table.Column<int>(nullable: true),
+                    UserId = table.Column<int>(nullable: false),
                     Plant1Id = table.Column<int>(nullable: false),
                     Plant2Id = table.Column<int>(nullable: false),
-                    Start = table.Column<DateTime>(nullable: false),
                     End = table.Column<DateTime>(nullable: false)
                 },
                 constraints: table =>

@@ -13,7 +13,8 @@ namespace BonsaiServer.Database
         public int Id { get; set; }
         public int UserId { get; set; }
 
-        [ForeignKey("UserId")][Display(Name ="UserId")]
+        [ForeignKey("UserId")]
+        [Display(Name = "UserId")]
         public User User { get; set; }
 
         [StringLength(20)]
@@ -22,21 +23,41 @@ namespace BonsaiServer.Database
         public byte LeavesId { get; set; }
         public byte FlowersId { get; set; }
 
-        [StringLength(3)][Column("LeavesColor")][Display(Name = "LeavesColor")]
+        [StringLength(3)]
+        [Column("StalkColor")]
+        [Display(Name = "StalkColor")]
+        public string StalkColorString { get; set; }
+
+        [StringLength(3)]
+        [Column("LeavesColor")]
+        [Display(Name = "LeavesColor")]
         public string LeavesColorString { get; set; }
 
-        [StringLength(3)][Column("FlowersColor")][Display(Name = "FlowersColor")]
+        [StringLength(3)]
+        [Column("FlowersColor")]
+        [Display(Name = "FlowersColor")]
         public string FlowersColorString { get; set; }
 
-        [StringLength(3)][Column("PotColor")][Display(Name = "PotColor")]
+        [StringLength(3)]
+        [Column("PotColor")]
+        [Display(Name = "PotColor")]
         public string PotColorString { get; set; }
 
-        [StringLength(3)][Column("SoilColor")][Display(Name = "SoilColor")]
+        [StringLength(3)]
+        [Column("SoilColor")]
+        [Display(Name = "SoilColor")]
         public string SoilColorString { get; set; }
 
         public Rarity.Tier Rarity { get; set; }
         public byte Slot { get; set; }
         #endregion
+
+        [NotMapped]
+        public Color StalkColor
+        {
+            get { return BColor.FromString(StalkColorString); }
+            set { StalkColorString = BColor.ToString(value); }
+        }
 
         [NotMapped]
         public Color LeavesColor
@@ -65,5 +86,6 @@ namespace BonsaiServer.Database
             get { return BColor.FromString(SoilColorString); }
             set { SoilColorString = BColor.ToString(value); }
         }
+
     }
 }

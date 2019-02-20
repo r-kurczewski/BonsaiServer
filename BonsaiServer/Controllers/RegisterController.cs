@@ -1,5 +1,4 @@
 ﻿using Microsoft.AspNetCore.Mvc;
-
 using BonsaiServer.Models;
 using Microsoft.Extensions.Options;
 using BonsaiServer.Database;
@@ -24,7 +23,7 @@ namespace BonsaiServer.Controllers
             if (repository.IsEmailUsed(user.Email)) return StatusCode(409, "Email is unavailable.");
             try
             {
-                repository.CreateUser(user);
+                repository.AddUser(user);
                 return Ok($"Account {user.Login} successfully created.");
             }
             catch (Exception ex)

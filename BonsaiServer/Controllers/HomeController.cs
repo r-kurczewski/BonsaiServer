@@ -1,8 +1,7 @@
-﻿using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
-using Newtonsoft.Json;
+﻿using BonsaiServer.Database;
 using BonsaiServer.Models;
-using BonsaiServer.Database;
+using Microsoft.AspNetCore.Mvc;
+using Microsoft.Extensions.Options;
 using System;
 
 namespace BonsaiServer.Controllers
@@ -30,43 +29,32 @@ namespace BonsaiServer.Controllers
             User user = new User()
             {
                 Login = "a",
-                PasswordHash = "b",
+                PasswordHash = "28355A2D1A8636F26EBD23DB7F7BC58F319F8B4D85282DDD308CFC5EEB18031B",
                 Email = "abc@wp.pl",
-                Session = "c"
+                Session = "IsThisWorking?"
             };
-            userRepository.CreateUser(user);
+            userRepository.AddUser(user);
 
             user = userRepository.GetUserByCredentials(user.Login, user.PasswordHash);
-
-            Plant plant = new Plant()
+            var rand = new Random();
+            for (int i = 0; i < 3; i++)
             {
-                User = user,
-                Name = DateTime.Now.ToString(),
-                FlowersId = 1,
-                LeavesId = 1,
-                LeavesColor = BColor.RandomColor(),
-                FlowersColor = BColor.RandomColor(),
-                SoilColor = BColor.RandomColor(),
-                PotColor = BColor.RandomColor(),
-                Rarity = Rarity.Tier.Premium,
-                Slot = 0,
-            };
-            plantsRepository.AddPlant(plant);
-
-            plant = new Plant()
-            {
-                User = user,
-                Name = DateTime.Now.ToString(),
-                FlowersId = 1,
-                LeavesId = 1,
-                LeavesColor = BColor.RandomColor(),
-                FlowersColor = BColor.RandomColor(),
-                SoilColor = BColor.RandomColor(),
-                PotColor = BColor.RandomColor(),
-                Rarity = Rarity.Tier.Premium,
-                Slot = 0,
-            };
-            plantsRepository.AddPlant(plant);
+                Plant plant = new Plant()
+                {
+                    User = user,
+                    Name = MutationScript.GenerateName(),
+                    FlowersId = 1,
+                    LeavesId = 1,
+                    StalkColor = BColor.RandomColor(),
+                    LeavesColor = BColor.RandomColor(),
+                    FlowersColor = BColor.RandomColor(),
+                    SoilColor = BColor.RandomColor(),
+                    PotColor = BColor.RandomColor(),
+                    Rarity = (Rarity.Tier)rand.Next(0, Enum.GetNames(typeof(Rarity.Tier)).Length),
+                    Slot = 0,
+                };
+                plantsRepository.AddPlant(plant);
+            }
 
             Mutation mutation = new Mutation()
             {
@@ -75,12 +63,6 @@ namespace BonsaiServer.Controllers
                 End = new DateTime(2018, 6, 6, 13, 13, 13),
             };
             return Ok("Added start data to database");
-        }
-
-        public ActionResult Remove()
-        {
-            plantsRepository.RemoveLastPlant();
-            return Ok("Removed last plant");
         }
     }
 }

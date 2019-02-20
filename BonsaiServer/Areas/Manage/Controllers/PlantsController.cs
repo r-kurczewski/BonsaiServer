@@ -57,7 +57,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Create([Bind("Id,UserId,Name,LeavesId,FlowersId,LeavesColorString,FlowersColorString,PotColorString,SoilColorString,Rarity,Slot")] Plant plant)
+        public async Task<IActionResult> Create([Bind("Id,UserId,Name,LeavesId,FlowersId,StalkColorString,LeavesColorString,FlowersColorString,PotColorString,SoilColorString,Rarity,Slot")] Plant plant)
         {
             if (ModelState.IsValid)
             {
@@ -91,7 +91,7 @@ namespace BonsaiServer.Areas.Manage.Controllers
         // more details see http://go.microsoft.com/fwlink/?LinkId=317598.
         [HttpPost]
         [ValidateAntiForgeryToken]
-        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Name,LeavesId,FlowersId,LeavesColorString,FlowersColorString,PotColorString,SoilColorString,Rarity,Slot")] Plant plant)
+        public async Task<IActionResult> Edit(int id, [Bind("Id,UserId,Name,LeavesId,FlowersId,StalkColorString,LeavesColorString,FlowersColorString,PotColorString,SoilColorString,Rarity,Slot")] Plant plant)
         {
             if (id != plant.Id)
             {

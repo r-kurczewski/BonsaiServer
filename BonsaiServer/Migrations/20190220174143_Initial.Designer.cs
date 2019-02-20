@@ -10,8 +10,8 @@ using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 namespace BonsaiServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    [Migration("20190219225153_Mutations_fix")]
-    partial class Mutations_fix
+    [Migration("20190220174143_Initial")]
+    partial class Initial
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -77,6 +77,10 @@ namespace BonsaiServer.Migrations
 
                     b.Property<string>("SoilColorString")
                         .HasColumnName("SoilColor")
+                        .HasMaxLength(3);
+
+                    b.Property<string>("StalkColorString")
+                        .HasColumnName("StalkColor")
                         .HasMaxLength(3);
 
                     b.Property<int>("UserId");

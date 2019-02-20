@@ -11,9 +11,7 @@ namespace BonsaiServer.Database
 
         Plant GetPlantById(int id);
 
-        IEnumerable<Plant> GetPlantsOfUser(string session);
-
-        void RemoveLastPlant();
+        IEnumerable<Plant> GetPlantsOfUser(User user);
 
         void RemovePlantById(int id);
 

@@ -20,7 +20,7 @@ namespace BonsaiServer.Controllers
         public IActionResult Index([FromBody]User cred)
         {
             User user = repository.GetUserByCredentials(cred.Login, cred.PasswordHash);
-            if (!user.Equals(null)) return Ok(user);
+            if (user != null) return Ok(user);
             else return StatusCode(400, "Login Error");
         }
     }

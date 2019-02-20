@@ -25,7 +25,7 @@ namespace BonsaiServer.Database
             return context.Users.Find(id);
         }
 
-        public void CreateUser(User user)
+        public void AddUser(User user)
         {
             context.Users.Add(user);
             context.SaveChanges();
