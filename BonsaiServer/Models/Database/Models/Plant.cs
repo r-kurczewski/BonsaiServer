@@ -52,6 +52,7 @@ namespace BonsaiServer.Database
         public byte Slot { get; set; }
         #endregion
 
+        #region properties
         [NotMapped]
         public Color StalkColor
         {
@@ -86,6 +87,26 @@ namespace BonsaiServer.Database
             get { return BColor.FromString(SoilColorString); }
             set { SoilColorString = BColor.ToString(value); }
         }
+        #endregion
 
+        static Random rand = new Random();
+
+        public static Plant RandomPlant(User user = null)
+        {
+            return new Plant()
+            {
+                User = user,
+                Name = MutationScript.GenerateName(),
+                FlowersId = 1,
+                LeavesId = 1,
+                StalkColor = BColor.RandomColor(),
+                LeavesColor = BColor.RandomColor(),
+                FlowersColor = BColor.RandomColor(),
+                SoilColor = BColor.RandomColor(),
+                PotColor = BColor.RandomColor(),
+                Rarity = (Rarity.Tier)rand.Next(0, Enum.GetNames(typeof(Rarity.Tier)).Length),
+                Slot = 0,
+            };
+        }
     }
 }

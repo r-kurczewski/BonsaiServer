@@ -35,3 +35,12 @@ li
 div{
     margin: 2px;
 }
+
+body {
+    background-color: lightgoldenrodyellow;
+    padding-bottom: 1px;
+}
+
+html {
+    background-color: white;
+}
