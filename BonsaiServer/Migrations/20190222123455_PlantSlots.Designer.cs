@@ -4,14 +4,16 @@ using BonsaiServer.Database;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 
 namespace BonsaiServer.Migrations
 {
     [DbContext(typeof(AppDbContext))]
-    partial class AppDbContextModelSnapshot : ModelSnapshot
+    [Migration("20190222123455_PlantSlots")]
+    partial class PlantSlots
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -103,151 +105,151 @@ namespace BonsaiServer.Migrations
                         new
                         {
                             Id = 1,
-                            FlowersColorString = "11f",
+                            FlowersColorString = "5bb",
                             FlowersId = (byte)1,
-                            LeavesColorString = "f91",
+                            LeavesColorString = "3f3",
                             LeavesId = (byte)1,
-                            Name = "BMXRE",
-                            PotColorString = "155",
-                            Rarity = (byte)5,
-                            Slot = (byte)1,
-                            SoilColorString = "3bb",
-                            StalkColorString = "3f1",
+                            Name = "FQJHOC",
+                            PotColorString = "31f",
+                            Rarity = (byte)0,
+                            Slot = (byte)0,
+                            SoilColorString = "119",
+                            StalkColorString = "135",
                             UserId = 1
                         },
                         new
                         {
                             Id = 2,
-                            FlowersColorString = "fbd",
+                            FlowersColorString = "793",
                             FlowersId = (byte)1,
-                            LeavesColorString = "555",
+                            LeavesColorString = "db5",
                             LeavesId = (byte)1,
-                            Name = "JMZJLDH",
-                            PotColorString = "5df",
-                            Rarity = (byte)5,
-                            Slot = (byte)2,
-                            SoilColorString = "9b9",
-                            StalkColorString = "d39",
+                            Name = "TLHIVVCZF",
+                            PotColorString = "19f",
+                            Rarity = (byte)1,
+                            Slot = (byte)1,
+                            SoilColorString = "f9b",
+                            StalkColorString = "59d",
                             UserId = 1
                         },
                         new
                         {
                             Id = 3,
-                            FlowersColorString = "9f1",
+                            FlowersColorString = "151",
                             FlowersId = (byte)1,
-                            LeavesColorString = "5b1",
+                            LeavesColorString = "553",
                             LeavesId = (byte)1,
-                            Name = "QFZKJQKX",
-                            PotColorString = "f3d",
-                            Rarity = (byte)4,
-                            Slot = (byte)3,
-                            SoilColorString = "fd3",
-                            StalkColorString = "1f3",
+                            Name = "EVXBJFCNX",
+                            PotColorString = "ff3",
+                            Rarity = (byte)2,
+                            Slot = (byte)2,
+                            SoilColorString = "9d3",
+                            StalkColorString = "775",
                             UserId = 1
                         },
                         new
                         {
                             Id = 4,
-                            FlowersColorString = "3f3",
+                            FlowersColorString = "b3d",
                             FlowersId = (byte)1,
-                            LeavesColorString = "f73",
+                            LeavesColorString = "9f7",
                             LeavesId = (byte)1,
-                            Name = "SGBHGZAXB",
-                            PotColorString = "119",
-                            Rarity = (byte)0,
-                            Slot = (byte)4,
-                            SoilColorString = "bdb",
-                            StalkColorString = "ddb",
+                            Name = "NWUWD",
+                            PotColorString = "b79",
+                            Rarity = (byte)2,
+                            Slot = (byte)3,
+                            SoilColorString = "b75",
+                            StalkColorString = "b95",
                             UserId = 1
                         },
                         new
                         {
                             Id = 5,
-                            FlowersColorString = "919",
+                            FlowersColorString = "751",
                             FlowersId = (byte)1,
-                            LeavesColorString = "739",
+                            LeavesColorString = "fb7",
                             LeavesId = (byte)1,
-                            Name = "QSRUCQRUGXT",
-                            PotColorString = "5f7",
-                            Rarity = (byte)1,
-                            Slot = (byte)5,
-                            SoilColorString = "759",
-                            StalkColorString = "71b",
+                            Name = "RNJRRYDFQ",
+                            PotColorString = "9d3",
+                            Rarity = (byte)0,
+                            Slot = (byte)4,
+                            SoilColorString = "135",
+                            StalkColorString = "391",
                             UserId = 1
                         },
                         new
                         {
                             Id = 6,
-                            FlowersColorString = "3b1",
+                            FlowersColorString = "d75",
                             FlowersId = (byte)1,
-                            LeavesColorString = "bfb",
+                            LeavesColorString = "7d3",
                             LeavesId = (byte)1,
-                            Name = "NFSLWQL",
-                            PotColorString = "fbd",
-                            Rarity = (byte)1,
-                            Slot = (byte)1,
-                            SoilColorString = "bb1",
-                            StalkColorString = "511",
+                            Name = "MZPPF",
+                            PotColorString = "3db",
+                            Rarity = (byte)4,
+                            Slot = (byte)0,
+                            SoilColorString = "b97",
+                            StalkColorString = "957",
                             UserId = 2
                         },
                         new
                         {
                             Id = 7,
-                            FlowersColorString = "5b3",
+                            FlowersColorString = "79f",
                             FlowersId = (byte)1,
-                            LeavesColorString = "bd3",
+                            LeavesColorString = "7d9",
                             LeavesId = (byte)1,
-                            Name = "DQDUFLDACMZ",
-                            PotColorString = "dd9",
-                            Rarity = (byte)2,
-                            Slot = (byte)2,
-                            SoilColorString = "3f7",
-                            StalkColorString = "bbf",
+                            Name = "ZKXMKDVLHT",
+                            PotColorString = "1bf",
+                            Rarity = (byte)3,
+                            Slot = (byte)1,
+                            SoilColorString = "7b3",
+                            StalkColorString = "55f",
                             UserId = 2
                         },
                         new
                         {
                             Id = 8,
-                            FlowersColorString = "133",
+                            FlowersColorString = "9bd",
                             FlowersId = (byte)1,
-                            LeavesColorString = "597",
+                            LeavesColorString = "9f7",
                             LeavesId = (byte)1,
-                            Name = "JDQWYLWT",
-                            PotColorString = "dbf",
+                            Name = "ZEXRLEFDP",
+                            PotColorString = "b17",
                             Rarity = (byte)5,
-                            Slot = (byte)3,
-                            SoilColorString = "7fb",
-                            StalkColorString = "5bf",
+                            Slot = (byte)2,
+                            SoilColorString = "975",
+                            StalkColorString = "15b",
                             UserId = 2
                         },
                         new
                         {
                             Id = 9,
-                            FlowersColorString = "1fb",
+                            FlowersColorString = "5b9",
                             FlowersId = (byte)1,
-                            LeavesColorString = "5b9",
+                            LeavesColorString = "f7f",
                             LeavesId = (byte)1,
-                            Name = "WEAYKSVPV",
-                            PotColorString = "137",
-                            Rarity = (byte)3,
-                            Slot = (byte)4,
-                            SoilColorString = "1db",
-                            StalkColorString = "591",
+                            Name = "OAFSSLGSC",
+                            PotColorString = "395",
+                            Rarity = (byte)0,
+                            Slot = (byte)3,
+                            SoilColorString = "ff3",
+                            StalkColorString = "7d5",
                             UserId = 2
                         },
                         new
                         {
                             Id = 10,
-                            FlowersColorString = "f9d",
+                            FlowersColorString = "3b9",
                             FlowersId = (byte)1,
-                            LeavesColorString = "dbd",
+                            LeavesColorString = "71f",
                             LeavesId = (byte)1,
-                            Name = "KLEVA",
-                            PotColorString = "15b",
-                            Rarity = (byte)5,
-                            Slot = (byte)5,
-                            SoilColorString = "71b",
-                            StalkColorString = "75f",
+                            Name = "IXTWJYQFORY",
+                            PotColorString = "fd1",
+                            Rarity = (byte)4,
+                            Slot = (byte)4,
+                            SoilColorString = "1d5",
+                            StalkColorString = "9d1",
                             UserId = 2
                         });
                 });
@@ -288,7 +290,7 @@ namespace BonsaiServer.Migrations
                             Id = 2,
                             Email = "radek@example.com",
                             Login = "radek",
-                            PasswordHash = "450a10fad8bc1453cf4690e7391f34df4e7c3621ccc7e1b45699190c6acc36e4",
+                            PasswordHash = "450A10FAD8BC1453CF4690E7391F34DF4E7C3621CCC7E1B45699190C6ACC36E4",
                             Session = "450a10fad8bc1453cf4690e7391f34df4e7c3621ccc7e1b45699190c6acc36e4"
                         });
                 });

@@ -30,17 +30,17 @@ namespace BonsaiServer.Database
                 {
                     Id = 1,
                     Login = "a",
-                    PasswordHash = "28355A2D1A8636F26EBD23DB7F7BC58F319F8B4D85282DDD308CFC5EEB18031B",
+                    PasswordHash = "28355a2d1a8636f26ebd23db7f7bc58f319f8b4d85282ddd308cfc5eeb18031b",
                     Email = "abc@wp.pl",
-                    Session = "IsThisWorking?"
+                    Session = "c8f0cbf67674c562415f802542e9e384ca056af3b8f2756acbfa7b0cfeeb6a95"
                 },
                 new User
                 {
                     Id = 2,
                     Login = "radek",
-                    PasswordHash = "450A10FAD8BC1453CF4690E7391F34DF4E7C3621CCC7E1B45699190C6ACC36E4",
+                    PasswordHash = "450a10fad8bc1453cf4690e7391f34df4e7c3621ccc7e1b45699190c6acc36e4",
                     Email = "radek@example.com",
-                    Session = "OtherSessionHash"
+                    Session = "450a10fad8bc1453cf4690e7391f34df4e7c3621ccc7e1b45699190c6acc36e4"
                 },
             });
 
@@ -65,6 +65,7 @@ namespace BonsaiServer.Database
                     Plant plant = Plant.RandomPlant();
                     plant.Id = plantId++;
                     plant.UserId = userId;
+                    plant.Slot = (byte)(i+1);
                     result.Add(plant);
                 }
             }

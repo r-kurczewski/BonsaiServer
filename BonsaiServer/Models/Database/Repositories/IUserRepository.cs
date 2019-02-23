@@ -1,9 +1,4 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Threading.Tasks;
-
-namespace BonsaiServer.Database
+﻿namespace BonsaiServer.Database
 {
     public interface IUserRepository
     {
@@ -20,5 +15,7 @@ namespace BonsaiServer.Database
         bool IsEmailUsed(string email);
 
         User GetUserByCredentials(string login, string passwordHash);
+
+        string SetNewSession(User user);
     }
 }

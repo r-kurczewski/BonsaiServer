@@ -1,8 +1,6 @@
-﻿using System.Diagnostics;
-using BonsaiServer.Database;
+﻿using BonsaiServer.Database;
 using BonsaiServer.Models;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.Extensions.Options;
 
 namespace BonsaiServer.Controllers
 {
@@ -12,7 +10,7 @@ namespace BonsaiServer.Controllers
 
         public IActionResult SellPlant([FromBody] AuthData<int> data)
         {
-            return Ok(data.data);
+            return Ok(data.Data);
         }
 
         public IActionResult GetMoney([FromBody] User user)

@@ -13,16 +13,14 @@
     @{
         var links = new List<string>() { "Plants", "Users", "Mutations" };
     }
-    <navbar>
-        <table><thead>
-                <tr>
-                    @foreach (var link in links)
-                    {
-                        <th><a asp-controller="@link" asp-action="Index">@link</a></th>
-                    }
-                </tr>
-            </thead></table>
-    </navbar>
+    <div class="links">
+            @foreach(var link in links)
+            {
+                <div class="link">
+                    <a asp-controller="@link" asp-action="Index">@link</a>
+                </div>
+            }
+    </div>
     @RenderBody()
 </body>
 </html>

@@ -1,4 +1,5 @@
 ﻿
+using BonsaiServer.Models;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -33,12 +34,12 @@ namespace BonsaiServer.Database
 
         public bool IsEmailUsed(string email)
         {
-            return !context.Users.FirstOrDefault(s => s.Email == email).Equals(null);
+            return context.Users.FirstOrDefault(s => s.Email == email) != null;
         }
 
         public bool IsLoginUsed(string login)
         {
-            return !context.Users.FirstOrDefault(s => s.Login == login).Equals(null);
+            return context.Users.FirstOrDefault(s => s.Login == login) != null;
         }
 
         public User GetUserBySession(string session)
@@ -49,6 +50,20 @@ namespace BonsaiServer.Database
         public User GetUserByCredentials(string login, string passwordHash)
         {
             return context.Users.FirstOrDefault(s => s.Login == login && s.PasswordHash == passwordHash);
+        }
+
+        public string SetNewSession(User user)
+        {
+            string session;
+            int i = 0;
+            do
+            {
+                session = Security.Sha256Hash(DateTime.Now.ToString() + i++);
+            } while (context.Users.FirstOrDefault(s => s.Session == session) != null);
+            user.Session = session;
+            context.Users.Find(user.Id).Session = session;
+            context.SaveChanges();
+            return session;
         }
     }
 }

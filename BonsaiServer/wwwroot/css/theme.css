@@ -1,14 +1,21 @@
-﻿table{
+﻿table {
     table-layout: auto;
-    border: 1px solid black;
+    align-content:center;
     width: 100%;
 }
 
-table, th, td {
-    text-align: center;
+.link{
+    display: inline-block;
+    margin: 4px;
 }
 
-th{
+.links {
+    background-color: bisque;
+    text-decoration: none;
+    color: black;
+}
+
+th {
     background-color: bisque;
 }
 
@@ -16,29 +23,28 @@ td {
     background-color: lightgoldenrodyellow;
 }
 
-a:link, a:active, a:hover, a:visited{
-    /*text-decoration: none;*/
-    
+.table th:last-child {
+    min-width: 170px;
 }
 
-th a, th a:hover
-{
-    color: black;
-    text-decoration: none;
+.link a, .link a:hover {
+    /*color: black;
+    text-decoration: none;*/
+    /*font-weight: bold;*/
 }
 
-li
-{
-    display:inline;
+li {
+    display: inline;
 }
 
-div{
+div {
     margin: 2px;
 }
 
 body {
     background-color: lightgoldenrodyellow;
     padding-bottom: 1px;
+
 }
 
 html {

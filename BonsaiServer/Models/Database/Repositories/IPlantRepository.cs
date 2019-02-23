@@ -16,5 +16,12 @@ namespace BonsaiServer.Database
         void RemovePlantById(int id);
 
         void AddPlant(Plant plant);
+
+        void MovePlant(int id, byte slot);
+
+        bool IsUserPlant(User user, int plantId);
+
+        void RenamePlant(Plant plant, string name);
+
     }
 }

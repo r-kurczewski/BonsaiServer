@@ -30,23 +30,29 @@ namespace BonsaiServer.Database
 
         public IEnumerable<Plant> GetPlantsOfUser(User user)
         {
-            var temp = context.Plants.Where(plant => plant.User.Session == user.Session).ToList();
-            user.Equals(null);
-            return temp;
+            return context.Plants.Where(plant => plant.User.Session == user.Session).ToList();
         }
 
-        public void RemoveLastPlant()
+        public bool IsUserPlant(User user, int plantId)
         {
-            if (context.Plants.Count() > 0)
-            { 
-                context.Remove(context.Plants.Last());
-                context.SaveChanges();
-            }
+            return context.Plants.Find(plantId).UserId == context.Users.FirstOrDefault(s => s.Session == user.Session).Id;
+        }
+
+        public void MovePlant(int id, byte slot)
+        {
+            context.Plants.Find(id).Slot = slot;
+            context.SaveChanges();
         }
 
         public void RemovePlantById(int id)
         {
             context.Plants.Remove(context.Plants.Find(id));
+            context.SaveChanges();
+        }
+
+        public void RenamePlant(Plant plant, string name)
+        {
+            context.Plants.Find(plant.Id).Name = name;
             context.SaveChanges();
         }
     }
