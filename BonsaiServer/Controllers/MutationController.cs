@@ -17,11 +17,11 @@ namespace BonsaiServer.Controllers
         }
 
         [HttpPost]
-        public IActionResult Get([FromBody] User user)
+        public IActionResult Get([FromBody] string session)
         {
             try
             {
-                Mutation mutation = mutationRepository.GetMutationOfUser(user);
+                Mutation mutation = mutationRepository.GetMutationOfUser(session);
                 if (mutation == null) return StatusCode(204, "No mutation in progress.");
                 return Ok(mutation);
             }
@@ -66,12 +66,12 @@ namespace BonsaiServer.Controllers
             }
         }
 
-        public IActionResult Abort([FromBody] AuthData<int> data)
+        public IActionResult Abort([FromBody] AuthData<int> id)
         {
             try
             {
-                if (mutationRepository.IsUserMutation(data.Session, data.Data))
-                    mutationRepository.Abort(new Mutation { Id = data.Data });
+                if (mutationRepository.IsUserMutation(id.Session, id.Data))
+                    mutationRepository.Abort(id.Data);
                 return Ok();
             }
             catch (Exception ex)

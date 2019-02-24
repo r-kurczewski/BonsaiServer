@@ -11,7 +11,7 @@ namespace BonsaiServer.Database
 
         Plant GetPlantById(int id);
 
-        IEnumerable<Plant> GetPlantsOfUser(User user);
+        IEnumerable<Plant> GetPlantsOfUser(string session);
 
         void RemovePlantById(int id);
 
@@ -19,9 +19,9 @@ namespace BonsaiServer.Database
 
         void MovePlant(int id, byte slot);
 
-        bool IsUserPlant(User user, int plantId);
+        bool IsUserPlant(string session, int plantId);
 
-        void RenamePlant(Plant plant, string name);
+        void RenamePlant(int plantId, string name);
 
     }
 }

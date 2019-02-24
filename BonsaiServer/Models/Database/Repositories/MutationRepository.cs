@@ -12,9 +12,9 @@ namespace BonsaiServer.Database
             this.context = context;
         }
 
-        public void Abort(Mutation mutation)
+        public void Abort(int mutationId)
         {
-            context.Mutations.Remove(context.Mutations.Find(mutation.Id));
+            context.Mutations.Remove(context.Mutations.Find(mutationId));
         }
 
         public Mutation GetMutationbyId(int id)
@@ -22,9 +22,9 @@ namespace BonsaiServer.Database
             return context.Mutations.Find(id);
         }
 
-        public Mutation GetMutationOfUser(User user)
+        public Mutation GetMutationOfUser(string session)
         {
-            return context.Mutations.FirstOrDefault(s => s.User.Session == user.Session);
+            return context.Mutations.FirstOrDefault(s => s.User.Session == session);
         }
 
         public bool IsUserMutation(string session, int mutationId)
@@ -33,9 +33,9 @@ namespace BonsaiServer.Database
         }
 
 
-        public void SetMutation(User user, Mutation mutation)
+        public void SetMutation(string session, Mutation mutation)
         {
-            if (context.Users.FirstOrDefault(s => s.Session == user.Session).Id != mutation.Id)
+            if (context.Users.FirstOrDefault(s => s.Session == session).Id != mutation.Id)
                 throw new UnauthorizedAccessException("Id mismatch");
             if (context.Plants.FirstOrDefault(s => s.UserId == mutation.Plant1.UserId) == null)
                 throw new NullReferenceException("Wrong plant1.");
@@ -43,11 +43,6 @@ namespace BonsaiServer.Database
                 throw new NullReferenceException("Wrong plant2.");
             context.Mutations.Add(mutation);
             context.SaveChanges();
-        }
-
-        public void SetMutation(string session, Mutation mutation)
-        {
-            throw new NotImplementedException();
         }
     }
 }

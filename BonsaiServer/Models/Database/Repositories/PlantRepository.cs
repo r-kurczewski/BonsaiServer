@@ -28,14 +28,15 @@ namespace BonsaiServer.Database
             return context.Plants;
         }
 
-        public IEnumerable<Plant> GetPlantsOfUser(User user)
+        public IEnumerable<Plant> GetPlantsOfUser(string session)
         {
-            return context.Plants.Where(plant => plant.User.Session == user.Session).ToList();
+                var temp = context.Plants.Where(plant => plant.User.Session == session).ToList();
+            return temp;
         }
 
-        public bool IsUserPlant(User user, int plantId)
+        public bool IsUserPlant(string session, int plantId)
         {
-            return context.Plants.Find(plantId).UserId == context.Users.FirstOrDefault(s => s.Session == user.Session).Id;
+            return context.Plants.Find(plantId).UserId == context.Users.FirstOrDefault(s => s.Session == session).Id;
         }
 
         public void MovePlant(int id, byte slot)
@@ -50,9 +51,9 @@ namespace BonsaiServer.Database
             context.SaveChanges();
         }
 
-        public void RenamePlant(Plant plant, string name)
+        public void RenamePlant(int plantId, string name)
         {
-            context.Plants.Find(plant.Id).Name = name;
+            context.Plants.Find(plantId).Name = name;
             context.SaveChanges();
         }
     }

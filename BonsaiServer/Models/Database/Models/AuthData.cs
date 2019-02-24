@@ -6,8 +6,12 @@ namespace BonsaiServer.Models
     public class AuthData<T>
     {
         public string Session { get; set; }
-        public User User { get; set; }
         public T Data { get; set; }
+
+        public AuthData()
+        {
+            
+        }
 
         public AuthData(string session, T data)
         {

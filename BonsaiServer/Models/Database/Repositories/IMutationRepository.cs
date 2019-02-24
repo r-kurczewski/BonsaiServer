@@ -4,11 +4,11 @@
     {
         Mutation GetMutationbyId(int id);
 
-        Mutation GetMutationOfUser(User user);
+        Mutation GetMutationOfUser(string session);
 
         void SetMutation(string session, Mutation mutation);
 
-        void Abort(Mutation mutation);
+        void Abort(int mutationId);
 
         bool IsUserMutation(string session, int mutationId);
 
