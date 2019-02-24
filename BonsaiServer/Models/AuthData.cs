@@ -5,18 +5,19 @@ namespace BonsaiServer.Models
     [Serializable]
     public class AuthData<T>
     {
+        public string Session { get; set; }
         public User User { get; set; }
         public T Data { get; set; }
 
         public AuthData(string session, T data)
         {
-            User = new User() { Session = session };
-            this.Data = data;
+            Session = session;
+            Data = data;
         }
 
         public AuthData(User user, T data)
         {
-            User = user;
+            Session = user.Session;
             Data = data;
         }
     }

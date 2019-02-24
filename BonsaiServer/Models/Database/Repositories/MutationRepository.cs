@@ -27,10 +27,11 @@ namespace BonsaiServer.Database
             return context.Mutations.FirstOrDefault(s => s.User.Session == user.Session);
         }
 
-        public bool IsUserMutation(User user, int mutationId)
+        public bool IsUserMutation(string session, int mutationId)
         {
-            return context.Users.FirstOrDefault(s => s.Session == user.Session).Id == mutationId;
+            return context.Users.FirstOrDefault(s => s.Session == session).Id == mutationId;
         }
+
 
         public void SetMutation(User user, Mutation mutation)
         {
@@ -42,6 +43,11 @@ namespace BonsaiServer.Database
                 throw new NullReferenceException("Wrong plant2.");
             context.Mutations.Add(mutation);
             context.SaveChanges();
+        }
+
+        public void SetMutation(string session, Mutation mutation)
+        {
+            throw new NotImplementedException();
         }
     }
 }

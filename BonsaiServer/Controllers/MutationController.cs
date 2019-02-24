@@ -36,7 +36,7 @@ namespace BonsaiServer.Controllers
         {
             try
             {
-                mutationRepository.SetMutation(data.User, data.Data);
+                mutationRepository.SetMutation(data.Session, data.Data);
                 return Ok("Success.");
             }
             catch (Exception ex)
@@ -50,7 +50,7 @@ namespace BonsaiServer.Controllers
         {
             try
             {
-                if (!mutationRepository.IsUserMutation(new User { Session = data.User.Session }, data.Data))
+                if (!mutationRepository.IsUserMutation(data.Session, data.Data))
                     throw new UnauthorizedAccessException();
 
                 Mutation mutation = mutationRepository.GetMutationbyId(data.Data);
@@ -70,7 +70,7 @@ namespace BonsaiServer.Controllers
         {
             try
             {
-                if (mutationRepository.IsUserMutation(new User { Session = data.User.Session }, data.Data))
+                if (mutationRepository.IsUserMutation(data.Session, data.Data))
                     mutationRepository.Abort(new Mutation { Id = data.Data });
                 return Ok();
             }

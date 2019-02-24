@@ -6,11 +6,11 @@
 
         Mutation GetMutationOfUser(User user);
 
-        void SetMutation(User user, Mutation mutation);
+        void SetMutation(string session, Mutation mutation);
 
         void Abort(Mutation mutation);
 
-        bool IsUserMutation(User user, int mutationId);
+        bool IsUserMutation(string session, int mutationId);
 
     }
 }

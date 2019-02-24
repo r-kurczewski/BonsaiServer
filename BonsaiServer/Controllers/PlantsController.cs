@@ -38,16 +38,16 @@ namespace BonsaiServer.Controllers
         }
 
         [HttpPost]
-        public IActionResult Move([FromBody] AuthData<List<int[]>> updates)
+        public IActionResult Move([FromBody] AuthData<List<int[]>> data)
         {
             try
             {
-                foreach (var arr in updates.Data)
-                {
-                    if (repository.IsUserPlant(updates.User, arr[0]))
-                        repository.MovePlant(arr[0], (byte)arr[1]);
-                }
-                return Ok();
+                //foreach (var arr in updates.Data)
+                //{
+                //    if (repository.IsUserPlant(updates.User, arr[0]))
+                //        repository.MovePlant(arr[0], (byte)arr[1]);
+                //}
+                return Ok(data);
             }
             catch (Exception ex)
             {
